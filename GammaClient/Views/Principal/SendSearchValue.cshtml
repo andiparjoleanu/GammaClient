@@ -1,0 +1,33 @@
+﻿@model IEnumerable<GammaClient.ViewModels.SchoolVM>
+@{
+    ViewData["Title"] = "SearchResults";
+}
+
+@if (Model.Any())
+{
+    foreach (var school in Model)
+    {  
+        <div class="search-school-result w3-animate-opacity" onclick="showDetail('@school.Id')">
+            <div class="p-2">
+                <h5>@school.Name</h5>
+                <p>@school.Type</p>
+            </div>
+            <hr />
+        </div>
+
+    }
+
+}
+else
+{
+    <h5>Nu există rezultate</h5>
+}
+
+<script>
+    function showDetail(value) {
+        $.get("/Principal/SchoolDetails", { id: value })
+            .done(function (response) {
+                $("#detailsSearchResult").html(response);
+            });
+    }
+</script>

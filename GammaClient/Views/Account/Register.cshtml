@@ -1,0 +1,73 @@
+﻿@inject GammaClient.Services.AdministrationClient administrationClient
+@model GammaClient.ViewModels.RegisterVM
+
+@{
+    ViewData["Title"] = "Register";
+    var roles = await administrationClient.GetRolesList();
+}
+
+<div class="container-fluid mb-4 container-bg-responsive gamma-subscribe d-flex align-items-end p-5">
+    <h3 class="col-5 text-primary overflow-hidden">Învățare interactivă, oriunde, oricând!</h3>
+</div>
+<div class="container mt-3 pb-3">
+    <h4>Utilizator nou</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Register" asp-controller="Account">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UserName" class="control-label"></label>
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ConfirmPassword" class="control-label"></label>
+                    <input asp-for="ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SelectedRole" class="control-label"></label>
+                    <select asp-for="SelectedRole" class="form-control">
+                        @for (int i = 0; i < roles.Count; i++)
+                        {
+                            <option value="@roles[i].Name">@roles[i].Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Înregistrare" class="btn btn-danger" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <p>Ai deja cont? <a asp-action="Login" asp-controller="Account">Autentifică-te!</a></p>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/styleLoginPage.js"></script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

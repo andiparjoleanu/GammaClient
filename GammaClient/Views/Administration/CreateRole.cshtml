@@ -1,0 +1,53 @@
+﻿@model GammaClient.ViewModels.RoleVM
+@inject GammaClient.Services.MemberClient _memberClient;
+
+@{
+    ViewData["Title"] = "CreateRole";
+    var member = await _memberClient.GetCurrentClient();
+}
+
+<div class="container mt-3 pb-3">
+    <h3>Creează un rol Gamma</h3>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="CreateRole">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="RoleName" class="control-label"></label>
+                    <input asp-for="RoleName" class="form-control" />
+                    <span asp-validation-for="RoleName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Creează" class="btn btn-danger" />
+                </div>
+            </form>
+            <p class="error-message">@TempData["CreateRoleErrorMessage"]</p>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="showAllRoles">Înapoi la lista de roluri</a>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/colorAdminPage.js"></script>
+    @if (member != null)
+    {
+        <script>
+            var popi = document.getElementById("popi-admin");
+            popi.title = '<span class="text-center d-block">@member.UserName</span>';
+            popi.setAttribute("data-content",
+                '<!DOCTYPE html><html><p class="text-center">@member.FirstName @member.LastName</p>' +
+                '<a href="../Account/Logout" class="btn btn-dark text-light">Deconectare</a></html>');
+        </script>
+    }
+    else
+    {
+        <script>
+            location.href = "../Account/Login";
+        </script>
+    }
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

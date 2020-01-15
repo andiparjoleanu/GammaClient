@@ -1,0 +1,215 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+/*a {
+  color: #0366d6;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+*/
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px; /* Vertically center the text there */
+}
+
+/* My Styles
+ ----------------------------------------------------------*/
+
+.error-message {
+    color: darkred;
+}
+
+.error-message-light {
+    color: white;
+}
+ .app-logo {
+     font-family: 'Crete Round';
+     font-size: 30px;
+ }
+
+.container-bg-responsive {
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: auto;
+    background-size: cover;
+}
+
+.gamma-container {
+    background-image: url('/assets/gammaLogo.PNG');
+}
+
+.gamma-subscribe {
+    background-image: url('/assets/gammaSubscribe.jpg');
+    height: 200px;
+}
+
+.home-create-account {
+    background-image: url('../assets/HomeAccountBg.jpg');
+}
+
+.home-girl-studying {
+    background-image: url('../assets/girlStudying.jpg');
+}
+
+.home-girl-writing {
+    background-image: url('../assets/pencils.jpg');
+}
+
+.home-student-texting {
+    background-image: url('../assets/StudentTexting.jpg');
+}
+
+.home-about {
+    background-image: url('../assets/HomeAbout.jpg');
+}
+
+.home-students {
+    background-image: url('../assets/Students.jpg');
+}
+
+.sketch-container {
+    background-image: url('../assets/sketch.png');
+}
+
+.search-school-result {
+    cursor: pointer;
+}
+
+.search-school-result:hover {
+    background-color:lightgray;
+}
+
+.school-details {
+    height: 350px;
+    overflow-y: scroll;
+}
+
+@media (max-width: 768px) {
+    .school-details {
+        height: auto;
+        overflow-y: visible;
+    }
+}
+
+.add-school {
+    font-size: 40px;
+    cursor: pointer;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+.my-close {
+    font-size: 20px;
+    color: dimgray;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-outline-yellow {
+    border-color: #DDC649;
+    color: #DDC649;
+}
+
+    .btn-outline-yellow:hover {
+        color: white;
+        background-color: #DDC649;
+    }
+
+.btn-yellow {
+    background-color: #DDC649;
+    color: white;
+}
+
+.btn-yellow:hover {
+    background-color: #DDC649;
+    color: white;
+}

@@ -1,0 +1,17 @@
+﻿@model GammaClient.ViewModels.SchoolVM
+
+@{
+    ViewData["Title"] = "SchoolDetails";
+}
+
+<div class="w3-animate-opacity">
+    <h4>@Model.Name</h4>
+    <hr />
+    <p>@Model.Address</p>
+    <br />
+    <p>@Model.Mail</p>
+    <p>@Model.Phone</p>
+
+    <a class="d-block" asp-action="ShowTeachers" asp-route-schoolid="@Model.Id">Vezi profesorii</a>
+    <a class="d-block" asp-action="ShowStudents" asp-route-schoolid="@Model.Id">Vezi studenții</a>
+</div>

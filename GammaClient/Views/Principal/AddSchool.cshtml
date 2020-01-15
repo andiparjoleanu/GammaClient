@@ -1,0 +1,75 @@
+﻿@model GammaClient.ViewModels.SchoolVM
+@inject GammaClient.Services.MemberClient _memberClient;
+
+@{
+    ViewData["Title"] = "AddSchool";
+    var member = await _memberClient.GetCurrentClient();
+}
+
+<div class="container mt-3 pb-3">
+    <h4 class="text-white">Adaugă o școală în baza de date Gamma</h4>
+    <hr style="border-color:white;" />
+    <div class="row text-white">
+        <div class="col-md-4">
+            <form asp-action="AddSchool">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Type" class="control-label"></label>
+                    <input asp-for="Type" class="form-control" />
+                    <span asp-validation-for="Type" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Phone" class="control-label"></label>
+                    <input asp-for="Phone" class="form-control" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Mail" class="control-label"></label>
+                    <input asp-for="Mail" class="form-control" />
+                    <span asp-validation-for="Mail" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Creează" class="btn btn-light" />
+                </div>
+            </form>
+        </div>
+        <div class="col-md-3 col-lg-4"></div>
+        <div class="col-md-5 col-lg-4 d-none d-md-block sketch-container container-bg-responsive"></div>
+    </div>
+    <p class="error-message-light">@TempData["addSchoolErrorMessage"]</p>
+    <div>
+        <a asp-action="Index" class="text-light">Înapoi la pagina principală</a>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="~/js/removeNavbarCollapse.js"></script>
+    <script src="~/js/colorPrincipalPage.js"></script>
+    @if (member != null)
+    {
+        <script>
+        popi = document.getElementById("popi");
+        popi.title = '<span class="text-center d-block">@member.UserName</span>';
+        popi.setAttribute("data-content",
+            '<!DOCTYPE html><html><p class="text-center">@member.FirstName @member.LastName</p>' +
+            '<a href="../Account/Logout" class="btn btn-dark text-light">Deconectare</a></html>');
+        </script>
+    }
+    else
+    {
+        <script>
+            location.href = "../Account/Login";
+        </script>
+    }
+}

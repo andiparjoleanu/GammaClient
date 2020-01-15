@@ -1,0 +1,69 @@
+﻿@inject GammaClient.Services.MemberClient _memberClient;
+
+@{
+    ViewData["Title"] = "Index";
+    var member = await _memberClient.GetCurrentClient();
+}
+
+<div class="container mt-3 pb-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7 p-2">
+                <div class="row pb-2 d-flex justify-content-between">
+                    <div class="d-flex flex-row">
+                        <i class="fa fa-search text-white mr-3" style="font-size:40px;"></i>
+                        <h2 class="text-light">Caută o școală</h2>
+                    </div>
+                    <a asp-action="AddSchool"><i class="fa fa-plus-circle text-white add-school"></i></a>
+                </div>
+                <div class="row pb-2">
+                    <input id="search" class="form-control w-100" placeholder="Introdu aici numele școlii..." />
+                </div>
+                <div class="row">
+                    <div class="jumbotron bg-white w-100" style="height:230px; overflow-y:scroll;">
+                        <div id="searchResult"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+                <div class="jumbotron bg-white d-flex flex-column align-items-center w-100 school-details">
+                    <div id="detailsSearchResult" class="text-center">Aici se vor afișa detalii despre instituția căutată</div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/removeNavbarCollapse.js"></script>
+    <script src="~/js/colorPrincipalPage.js"></script>
+    @if (member != null)
+    {
+        <script>
+        popi = document.getElementById("popi");
+        popi.title = '<span class="text-center d-block">@member.UserName</span>';
+        popi.setAttribute("data-content",
+            '<!DOCTYPE html><html><p class="text-center">@member.FirstName @member.LastName</p>' +
+            '<a href="Account/Logout" class="btn btn-dark text-light">Deconectare</a></html>');
+        </script>
+    }
+    else
+    {
+        <script>
+            location.href = "../Account/Login";
+        </script>
+    }
+
+    <script>
+        let search = document.getElementById("search");
+        search.oninput = function () {
+            $.get("/Principal/SendSearchValue", { value: search.value })
+                .done(function (response) {
+                    $("#searchResult").html(response);
+                });
+        };
+    </script>
+}

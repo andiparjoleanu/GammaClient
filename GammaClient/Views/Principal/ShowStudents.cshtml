@@ -1,0 +1,126 @@
+﻿@model IEnumerable<GammaClient.ViewModels.StudentVM>
+@inject GammaClient.Services.MemberClient _memberClient;
+
+@{
+    ViewData["Title"] = "ShowStudents";
+    var schoolName = ViewBag.showStudentsSchool;
+    var schoolId = ViewBag.schoolId;
+    var member = await _memberClient.GetCurrentClient();
+}
+
+    <div class="container mt-3 pb-3">
+        <h2 class="text-light">@schoolName</h2>
+        <h4 class="text-light">Studenți</h4>
+        @if (Model.Any())
+        {
+            <table class="table text-light" style="border-color:aliceblue;">
+                <thead>
+                    <tr>
+                        <th>
+                            Student
+                        </th>
+                        <th>
+                            Clasa
+                        </th>
+                        <th>
+                            Specializare
+                        </th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-light">
+                                @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
+                            </td>
+                            <td class="text-light">
+                                @Html.DisplayFor(modelItem => item.Grade)
+                            </td>
+                            <td class="text-light">
+                                @Html.DisplayFor(modelItem => item.FieldOfStudy)
+                            </td>
+                            <td class="text-light">
+                                <a class="text-light" asp-action="EditStudent" asp-controller="Principal" asp-route-studentid="@item.MemberId" asp-route-schoolid="@schoolId">Editează</a>
+                            </td>
+                            <td class="text-light">
+                                <a href="#" class="text-light" onclick="deleteInfoStudent('@item.FirstName @item.LastName', '@item.MemberId', '@item.SchoolId');">
+                                    Șterge
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 id="deletedElement"></h3>
+                        <span class="close">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <p>Confirmați finalizarea operației</p>
+                    </div>
+                    <div class="modal-footer">
+                        <input id="studentid" type="hidden" />
+                        <input id="schoolid" type="hidden" />
+                        <button onclick="routeStudent();" class="btn btn-primary">Ok</button>
+                        <button id="giveUp" class="btn btn-primary">Renunță</button>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <hr style="border-color:aliceblue;" />
+            <p class="text-light">Nu există studenți înregistrați pentru această instituție</p>
+        }
+
+        <a asp-action="AddStudents" class="btn btn-light" asp-route-schoolid="@schoolId">Adaugă studenți</a>
+        <br />
+        <br />
+        <a asp-action="Index" class="text-light">Întoarce-te la pagina principală</a>
+    </div>
+
+@section Scripts {
+    <script src="~/js/removeNavbarCollapse.js"></script>
+    <script src="~/js/colorPrincipalPage.js"></script>
+    <script src="~/js/modal.js"></script>
+    <script>
+        function deleteInfoStudent(name, student, school) {
+            deletedElement.innerHTML = "Stergeți " + name;
+            modal.style.display = "block";
+            document.getElementById("studentid").value = student;
+            document.getElementById("schoolid").value = school;
+        }
+
+        function routeStudent() {
+            let studentid = document.getElementById("studentid").value;
+            let schoolid = document.getElementById("schoolid").value;
+
+            let link = document.createElement("a");
+            link.setAttribute("href", "/Principal/RemoveStudent?studentid=" + studentid + "&school=" + schoolid);
+            link.click();
+        }
+    </script>
+
+    @if (member != null)
+    {
+        <script>
+        popi = document.getElementById("popi");
+        popi.title = '<span class="text-center d-block">@member.UserName</span>';
+        popi.setAttribute("data-content",
+            '<!DOCTYPE html><html><p class="text-center">@member.FirstName @member.LastName</p>' +
+            '<a href="../Account/Logout" class="btn btn-dark text-light">Deconectare</a></html>');
+        </script>
+    }
+    else
+    {
+        <script>
+            location.href = "../Account/Login";
+        </script>
+    }
+}

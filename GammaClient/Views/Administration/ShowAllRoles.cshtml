@@ -1,0 +1,120 @@
+﻿@using GammaClient.ViewModels;
+@inject GammaClient.Services.MemberClient _memberClient;
+
+@model IEnumerable<EditRoleVM>
+@{
+    ViewData["Title"] = "ShowAllRole";
+    var member = await _memberClient.GetCurrentClient();
+}
+
+    <div class="container mt-3 pb-3">
+        @if (Model.Any())
+        {
+            <h2>Utilizatori activi Gamma</h2>
+            <hr />
+            foreach (var editRoleVM in Model)
+            {
+                <div class="card border-danger h-100 mt-3">
+                    <div class="modal-header">
+                        <h3 class="text-danger">@editRoleVM.RoleName</h3>
+                        <span class="my-close" onclick="deleteRole('@editRoleVM.RoleName', '@editRoleVM.RoleId')">&times;</span>
+                    </div>
+                    <div class="card-body d-flex flex-column align-items-start">
+                        @if (editRoleVM.Users.Any())
+                        {
+                            foreach (var user in editRoleVM.Users)
+                            {
+                                <p class="card-text">@user</p>
+                            }
+                        }
+                        else
+                        {
+                            <p class="card-text">
+                                Nu există utilizatori înregistrați pentru acest rol
+                            </p>
+                        }
+
+                        <a class="btn btn-outline-danger mt-auto" asp-action="editRole"
+                           asp-controller="Administration" asp-route-roleid="@editRoleVM.RoleId">
+                            Editează
+                        </a>
+                    </div>
+
+                </div>
+            }
+
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 id="deletedElement"></h3>
+                        <span class="close">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <p>Atenție! Toate conturile cu acest rol vor fi eliminate din sistem!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <input id="roleid" type="hidden" />
+                        <button onclick="routeRole();" class="btn btn-danger">Ok</button>
+                        <button id="giveUp" class="btn btn-danger">Renunță</button>
+                    </div>
+                </div>
+            </div>
+
+            <a class="btn btn-danger" style="margin-top: 20px; width:auto" asp-controller="Administration" asp-action="createRole">
+                Creează un rol
+            </a>
+        }
+        else
+        {
+            <div class="card bg-danger text-white">
+                <div class="card-header">
+                    Niciun rol nu a fost încă creat
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Adaugă acum un rol în aplicație!</p>
+                    <a class="btn btn-danger border-white mt-auto" style="width:auto" asp-controller="Administration" asp-action="createRole">
+                        Creează un rol
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+
+@section Scripts {
+    <script src="~/js/colorAdminPage.js"></script>
+    <script src="~/js/modal.js"></script>
+    <script>
+        function deleteRole(name, roleid) {
+            deletedElement.innerHTML = "Stergeți rolul " + name + "?";
+            modal.style.display = "block";
+            document.getElementById("roleid").value = roleid;
+        }
+
+        function routeRole() {
+            let roleid = document.getElementById("roleid").value;
+
+            let link = document.createElement("a");
+            link.setAttribute("href", "/Administration/rmvrole/" + roleid);
+            link.click();
+        }
+    </script>
+    @if (member != null)
+    {
+        <script>
+            var popi = document.getElementById("popi-admin");
+            popi.title = '<span class="text-center d-block">@member.UserName</span>';
+            popi.setAttribute("data-content",
+                '<!DOCTYPE html><html><p class="text-center">@member.FirstName @member.LastName</p>' +
+                '<a href="../Account/Logout" class="btn btn-danger text-light">Deconectare</a></html>');
+        </script>
+    }
+    else
+    {
+        <script>
+            location.href = "../Account/Login";
+        </script>
+    }
+}
+
+
+

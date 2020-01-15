@@ -1,0 +1,72 @@
+﻿@using GammaClient.ViewModels;
+@inject GammaClient.Services.MemberClient _memberClient;
+
+@model IEnumerable<CourseVM>
+@{
+    ViewData["Title"] = "Index";
+    var member = await _memberClient.GetCurrentClient();
+}
+
+<div class="container mt-3 pb-3">
+    @if (Model.Any())
+    {
+        <h2>Cursuri predate</h2>
+        <hr />
+        foreach (var courseVM in Model)
+        {
+            <div class="card h-100 mt-3 w3-animate-opacity" style="border-color:#DDC649;">
+                <div class="modal-header">
+                    <h3 style="color:#DDC649;">@courseVM.Name</h3>
+                    <span class="my-close">&times;</span>
+                </div>
+                <div class="card-body d-flex flex-column align-items-start">
+                    <h5>@courseVM.Description</h5>
+                    <h6><span style="color:#CCB538;">Domeniu de studiu:</span> @courseVM.FieldOfStudy</h6>
+                    <h6><span style="color:#CCB538;">Grupa de studiu:</span> @courseVM.Grade</h6>
+                    <br />
+                    <a class="btn btn-outline-light mt-auto btn-outline-yellow" asp-action="editCourse"
+                       asp-controller="Teacher" asp-route-courseid="@courseVM.CourseId">
+                        Editează
+                    </a>
+                </div>
+
+            </div>
+        }
+        <a class="btn btn-outline-light btn-outline-yellow"  style="margin-top: 20px; width:auto" asp-controller="Teacher" asp-action="createCourse">
+            Adaugă un curs
+        </a>
+    }
+    else
+    {
+        <div class="card text-dark">
+            <div class="card-header">
+                Nu s-au găsit cursuri predate
+            </div>
+            <div class="card-body">
+                <a class="btn btn-outline-light btn-outline-yellow mt-auto" style="width:auto" asp-controller="Teacher" asp-action="createCourse">
+                    Adaugă un curs
+                </a>
+            </div>
+        </div>
+    }
+</div>
+@section Scripts {
+    <script src="~/js/removeNavbarCollapse.js"></script>
+    <script src="~/js/colorTeacherPage.js"></script>
+    @if (member != null)
+    {
+        <script>
+            var popi = document.getElementById("popi");
+            popi.title = '<span class="text-center d-block">@member.UserName</span>';
+            popi.setAttribute("data-content",
+                '<!DOCTYPE html><html><p class="text-center">@member.FirstName @member.LastName</p>' +
+                '<a href="../Account/Logout" class="btn btn-outline-light btn-outline-yellow">Deconectare</a></html>');
+        </script>
+    }
+    else
+    {
+        <script>
+            location.href = "../Account/Login";
+        </script>
+    }
+}

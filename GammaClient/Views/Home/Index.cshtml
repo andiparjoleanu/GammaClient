@@ -1,0 +1,115 @@
+﻿@model GammaClient.ViewModels.IndexVM
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (Model.Role == "none")
+{
+    <div class="p-2 bg-light border-bottom text-center position-sticky sticky-top">
+        <h6>Contul tău nu este activat! Un administrator îl va activa curând!</h6>
+    </div>
+}
+
+<div class="container-fluid container-bg-responsive home-students w3-animate-opacity">
+    <div class="row p-3" style="height:200px;">
+        <div class="col-9"></div>
+        <div class="col-3 gamma-container container-bg-responsive w3-animate-zoom"></div>
+    </div>
+    @{
+        for (int i = 0; i < 4; i++)
+        {
+            <div class="row p-5"></div>
+        }
+    }
+</div>
+
+<div class="container-fluid container-bg-responsive bg-danger">
+    <div class="row p-2"></div>
+    <div class="row p-3 d-flex flex-column align-items-center">
+        <h3 class="text-light font-weight-bold">Învățare interactivă, oriunde, oricând!</h3>
+    </div>
+    <div class="row p-1"></div>
+    <div class="row p-3 text-light w3-animate-top">
+        <div class="col-4 p-3 d-flex flex-column align-items-center justify-content-around">
+            <i class="far fa-star icon-star lnr lnr-star ion-ios-star-outline text-light" style="font-size:30px;"></i>
+            <h4 class="text-center">Școala, altfel</h4>
+            <p class="text-center">Platforma noastră încurajează îmbunătățirea sistemului educațional prin crearea unui set de instrumente organizatorice disponibile online</p>
+        </div>
+        <div class="col-4 p-3 d-flex flex-column align-items-center justify-content-around">
+            <i class="fa fa-home icon-home lnr lnr-home ion-ios-home-outline text-light" style="font-size:30px;"></i>
+            <h4 class="text-center">Împreună, suntem mai mulți!</h4>
+            <p class="text-center">Gamma este o comunitate online formată din numeroși elevi și profesori din centre educaționale din toată lumea!</p>
+        </div>
+        <div class="col-4 p-3 d-flex flex-column align-items-center justify-content-around">
+            <i class="fa fa-user icon-user lnr lnr-user ion-ios-contact-outline text-light" style="font-size:30px;"></i>
+            <h4 class="text-center">Înregistrare gratuită</h4>
+            <p class="text-center">Serviciile Gamma sunt gratis, atât pentru studenți, cât și pentru cadrele didactice</p>
+        </div>
+    </div>
+
+    <div class="row p-2"></div>
+</div>
+
+<div class="container-fluid container-bg-responsive home-girl-studying w3-animate-opacity">
+    <div class="row p-5"></div>
+    <div class="row p-3">
+        <div class="col-6 col-md-7"></div>
+        <div class="col-6 col-md-5">
+            <h3 class="text-dark font-weight-bold">Nu pierzi nicio lecție!</h3>
+            <h5 class="text-dark">Profesorii pot încărca pe platformă suportul de curs, în format digital</h5>
+        </div>
+    </div>
+    <div class="row p-5"></div>
+</div>
+
+<div class="container-fluid container-bg-responsive home-girl-writing w3-animate-opacity">
+    <div class="row p-5"></div>
+    <div class="row p-3">
+        <div class="col-6 col-md-5">
+            <h3 class="text-light font-weight-bold">Fără caiete la curs!</h3>
+            <h5 class="text-light">Poți să salvezi notițele pe pagina cursului</h5>
+        </div>
+        <div class="col-6 col-md-7"></div>
+    </div>
+    <div class="row p-5"></div>
+</div>
+
+<div class="container-fluid container-bg-responsive home-student-texting w3-animate-opacity">
+    <div class="row p-5"></div>
+    <div class="row p-3">
+        <div class="col-6 col-md-7"></div>
+        <div class="col-6 col-md-5">
+            <h3 class="text-dark font-weight-bold">Disponibil pe orice device</h3>
+            <h5 class="text-dark">Poți să fii la curent cu tot ce se întâmplă la școala, chiar și de pe mobil</h5>
+        </div>
+    </div>
+    <div class="row p-5"></div>
+</div>
+
+@if (Model.Role == "guest")
+{
+    <div class="container-fluid container-bg-responsive home-create-account p-5 w3-animate-opacity">
+        <h3 class="text-dark font-weight-bold text-center">Conectează-te cu școala ta!</h3>
+        <div class="container-fluid p-2 d-flex flex-row justify-content-around">
+            <a class="btn btn-dark" asp-action="Login" asp-controller="Account">Autentificare</a>
+            <a class="btn btn-dark" asp-action="Register" asp-controller="Account">Înregistrare</a>
+        </div>
+    </div>
+
+    <script src="~/js/removeNavbarChildren.js"></script>
+}
+else
+{
+    <script>
+        var popi = document.getElementById("popi");
+        
+        popi.title = '<span class="text-center d-block">@Model.Username</span>';
+        popi.setAttribute("data-content",
+            '<!DOCTYPE html><html><p class="text-center">@Model.Name</p>' + 
+            '<a href="Account/Logout" class="btn btn-primary text-light">Deconectare</a></html>');
+    </script>
+}
+
+@section Scripts {
+    <script src="~/js/removeNavbarCollapse.js"></script>
+}

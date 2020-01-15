@@ -1,0 +1,60 @@
+﻿@model GammaClient.ViewModels.TeacherVM
+@inject GammaClient.Services.MemberClient _memberClient;
+
+@{
+    ViewData["Title"] = "EditTeacher";
+    var schoolName = ViewBag.showTeachersSchool;
+    var member = await _memberClient.GetCurrentClient();
+}
+
+<div class="container mt-3 pb-3">
+    <h2 class="text-light">@schoolName</h2>
+    <hr style="border-color:white;" />
+    <h3 class="text-white">@Model.FirstName @Model.LastName</h3>
+    <h5 class="text-white">Editează informațiile</h5>
+    <br />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="EditTeacher">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Department" class="control-label text-light"></label>
+                    <input asp-for="Department" value="@Model.Department" class="form-control" />
+                    <span asp-validation-for="Department" class="text-danger"></span>
+                </div>
+                <input type="hidden" asp-for="MemberId" />
+                <input type="hidden" asp-for="FirstName" />
+                <input type="hidden" asp-for="LastName" />
+                <input type="hidden" asp-for="SchoolId" />
+                <div class="form-group">
+                    <input type="submit" value="Salvează modificările" class="btn btn-light" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="ShowTeachers" asp-route-schoolid="@Model.SchoolId" class="text-light">Înapoi la lista de profesori</a>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/removeNavbarCollapse.js"></script>
+    <script src="~/js/colorPrincipalPage.js"></script>
+    @if (member != null)
+    {
+        <script>
+        popi = document.getElementById("popi");
+        popi.title = '<span class="text-center d-block">@member.UserName</span>';
+        popi.setAttribute("data-content",
+            '<!DOCTYPE html><html><p class="text-center">@member.FirstName @member.LastName</p>' +
+            '<a href="../Account/Logout" class="btn btn-dark text-light">Deconectare</a></html>');
+        </script>
+    }
+    else
+    {
+        <script>
+            location.href = "../Account/Login";
+        </script>
+    }
+}

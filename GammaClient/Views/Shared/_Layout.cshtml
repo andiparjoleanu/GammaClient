@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Gamma</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Crete+Round:200,300,400,700" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,700" />
+
+    <link href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary box-shadow">
+            <div id="navbar-content" class="container">
+                <a id="logoSymbol" class="navbar-brand app-logo w3-animate-opacity" asp-area="" asp-controller="Home" asp-action="Index" onmouseenter="changeLogoOnMouseEnter()">&#915;    </a>
+                <a id="logoGamma" class="navbar-brand app-logo w3-animate-opacity" asp-area="" asp-controller="Home" asp-action="Index" style="display:none;" onmouseout="changeLogoOnMouseOut()">GAMMA</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a href="#" id="popi" class="nav-link text-light" data-toggle="popover" data-placement="bottom" title="Some tooltip text!" data-content="Some Content!">Contul meu</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <footer class="border-top footer text-white bg-primary">
+        <div class="container">
+            &copy; 2019 - Gamma - Toate drepturile rezervate
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover({
+                html: true
+            })
+        })
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

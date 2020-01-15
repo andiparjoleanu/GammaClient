@@ -1,0 +1,72 @@
+﻿@model List<GammaClient.ViewModels.AddUserRoleVM>
+@inject GammaClient.Services.MemberClient _memberClient;
+
+@{
+    ViewData["Title"] = "EditRole";
+    var roleid = ViewBag.RoleId;
+    var member = await _memberClient.GetCurrentClient();
+}
+
+<div class="container mt-3 pb-3">
+    <h3>Adaugă utilizatori pentru acest rol</h3>
+    <hr />
+
+    @if (Model.Any())
+    {
+        <form method="post" asp-action="EditRole">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="d-flex flex-column align-items-start">
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            <div class="custom-control custom-checkbox d-inline">
+                                <input type="hidden" asp-for="@Model[i].FullName" />
+                                <input type="hidden" asp-for="@Model[i].Name" />
+                                <input type="checkbox" class="custom-control-input" asp-for="@Model[i].IsSelected" />
+                                <label class="custom-control-label" asp-for="@Model[i].IsSelected">
+                                    @Model[i].FullName (@Model[i].Name)
+                                </label>
+                            </div>
+                        }
+                    </div>
+                    <input type="hidden" asp-for="@roleid" />
+                    <div class="form-group mt-5">
+                        <input type="submit" value="Salvează modificările" class="btn btn-danger" />
+                    </div>
+
+                    <div>
+                        <p>@TempData["updateRolesErrorMessage"]</p>
+                    </div>
+                </div>
+            </div>
+        </form>
+    }
+    else
+    {
+        <p>Toți utilizatorii au un rol atribuit</p>
+    }
+    <div>
+        <a class="btn btn-danger mt-auto" asp-action="ShowAllRoles">Înapoi la lista de roluri</a>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/colorAdminPage.js"></script>
+    @if (member != null)
+    {
+        <script>
+            var popi = document.getElementById("popi-admin");
+            popi.title = '<span class="text-center d-block">@member.UserName</span>';
+            popi.setAttribute("data-content",
+                '<!DOCTYPE html><html><p class="text-center">@member.FirstName @member.LastName</p>' +
+                '<a href="../Account/Logout" class="btn btn-dark text-light">Deconectare</a></html>');
+        </script>
+    }
+    else
+    {
+        <script>
+            location.href = "../Account/Login";
+        </script>
+    }
+}

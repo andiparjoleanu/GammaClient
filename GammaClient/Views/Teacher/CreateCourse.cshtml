@@ -1,0 +1,68 @@
+﻿@inject GammaClient.Services.MemberClient _memberClient;
+@model GammaClient.ViewModels.CourseVM
+
+@{
+    var teacherId = ViewBag.teacherId;
+    ViewData["Title"] = "CreateCourse";
+    var member = await _memberClient.GetCurrentClient();
+}
+
+<div class="container mt-3 pb-3">
+    <h2>Creați un curs</h2>
+    <hr style="border-color:#DDC649;" />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="CreateCourse">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="CourseId" />
+                <input type="hidden" asp-for="TeacherId" value="@teacherId" />
+                <div class="form-group">
+                    <label asp-for="Grade" class="control-label"></label>
+                    <input asp-for="Grade" class="form-control" />
+                    <span asp-validation-for="Grade" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Creează" class="btn btn-outline-light btn-outline-yellow" />
+                </div>
+            </form>
+            <p class="error-message-light">@TempData["createCourseErrorMessage"]</p>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Înapoi la lista de cursuri</a>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/removeNavbarCollapse.js"></script>
+    <script src="~/js/colorTeacherPage.js"></script>
+    @if (member != null)
+    {
+        <script>
+            var popi = document.getElementById("popi");
+            popi.title = '<span class="text-center d-block">@member.UserName</span>';
+            popi.setAttribute("data-content",
+                '<!DOCTYPE html><html><p class="text-center">@member.FirstName @member.LastName</p>' +
+                '<a href="../Account/Logout" class="btn btn-outline-light btn-outline-yellow">Deconectare</a></html>');
+        </script>
+    }
+    else
+    {
+        <script>
+            location.href = "../Account/Login";
+        </script>
+    }
+}
+
+

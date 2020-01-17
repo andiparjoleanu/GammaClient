@@ -1,0 +1,76 @@
+﻿@model List<GammaClient.ViewModels.StudentVM>
+@inject GammaClient.Services.MemberClient _memberClient;
+
+@{
+    ViewData["Title"] = "SubscribeStudents";
+    var member = await _memberClient.GetCurrentClient();
+    var courseid = ViewBag.courseId;
+    var courseName = ViewBag.courseName;
+}
+
+    <div class="container mt-3 pb-3">
+        <h2>@courseName</h2>
+        <hr style="border-color:#DDC649;" />
+        @if (Model.Any())
+        {
+            <form method="post" asp-action="SubscribeStudents">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="col">
+                        <div class="d-flex flex-column align-items-start">
+                            @for (int i = 0; i < Model.Count; i++)
+                            {
+                                <div class="custom-control custom-checkbox d-inline">
+                                    <input type="hidden" asp-for="@Model[i].SchoolId" />
+                                    <input type="hidden" asp-for="@Model[i].MemberId" />
+                                    <input type="checkbox" class="custom-control-input" asp-for="@Model[i].IsSelected" />
+                                    <label class="custom-control-label" asp-for="@Model[i].IsSelected">
+                                        @Model[i].FirstName @Model[i].LastName, @Model[i].FieldOfStudy, Grupa @Model[i].Grade
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                        <input type="hidden" asp-for="@courseid" />
+                        <div class="form-group mt-5">
+                            <input type="submit" value="Salvează modificările" class="btn btn-outline-light btn-outline-yellow" />
+                        </div>
+
+                        @if ((string)TempData["subscribeStudentsErrorMessage"] != "")
+                        {
+                            <div>
+                                <p>@TempData["subscribeStudentsErrorMessage"]</p>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </form>
+        }
+        else
+        {
+            <p>Nu există studenți disponibili</p>
+        }
+
+        <a asp-controller="Teacher" asp-action="ShowStudents" asp-route-courseid="@courseid">Înapoi la lista de studenți înscriși</a>
+    </div>
+
+@section Scripts {
+    <script src="~/js/removeNavbarCollapse.js"></script>
+    <script src="~/js/colorTeacherPage.js"></script>
+    @if (member != null)
+    {
+        <script>
+            var popi = document.getElementById("popi");
+            popi.title = '<span class="text-center d-block">@member.UserName</span>';
+            popi.setAttribute("data-content",
+                '<!DOCTYPE html><html><p class="text-center">@member.FirstName @member.LastName</p>' +
+                '<a href="../Account/Logout" class="btn btn-outline-light btn-outline-yellow">Deconectare</a></html>');
+        </script>
+    }
+    else
+    {
+        <script>
+            location.href = "../Account/Login";
+        </script>
+    }
+}

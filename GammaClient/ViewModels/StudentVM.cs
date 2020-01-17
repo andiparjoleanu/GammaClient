@@ -12,6 +12,7 @@ namespace GammaClient.ViewModels
         
         [DisplayName("Clasă / An")]
         public int Grade { get; set; }
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
 

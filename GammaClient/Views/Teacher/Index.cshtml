@@ -7,52 +7,91 @@
     var member = await _memberClient.GetCurrentClient();
 }
 
-<div class="container mt-3 pb-3">
-    @if (Model.Any())
-    {
-        <h2>Cursuri predate</h2>
-        <hr />
-        foreach (var courseVM in Model)
+    <div class="container mt-3 pb-3">
+        @if (Model.Any())
         {
-            <div class="card h-100 mt-3 w3-animate-opacity" style="border-color:#DDC649;">
-                <div class="modal-header">
-                    <h3 style="color:#DDC649;">@courseVM.Name</h3>
-                    <span class="my-close">&times;</span>
-                </div>
-                <div class="card-body d-flex flex-column align-items-start">
-                    <h5>@courseVM.Description</h5>
-                    <h6><span style="color:#CCB538;">Domeniu de studiu:</span> @courseVM.FieldOfStudy</h6>
-                    <h6><span style="color:#CCB538;">Grupa de studiu:</span> @courseVM.Grade</h6>
-                    <br />
-                    <a class="btn btn-outline-light mt-auto btn-outline-yellow" asp-action="editCourse"
-                       asp-controller="Teacher" asp-route-courseid="@courseVM.CourseId">
-                        Editează
-                    </a>
-                </div>
+            <h2>Cursuri predate</h2>
+            <hr />
+            foreach (var courseVM in Model)
+            {
+                <div class="card h-100 mt-3 w3-animate-opacity" style="border-color:#DDC649;">
+                    <div class="modal-header">
+                        <h3 style="color:#DDC649;">@courseVM.Name</h3>
+                        <span class="my-close" onclick="deleteCourse('@courseVM.Name', '@courseVM.CourseId')">&times;</span>
+                    </div>
+                    <div class="card-body d-flex flex-column align-items-start">
+                        <h5>@courseVM.Description</h5>
+                        <h6><span style="color:#CCB538;">Domeniu de studiu:</span>&nbsp;@courseVM.FieldOfStudy</h6>
+                        <h6><span style="color:#CCB538;">Grupa de studiu:</span>&nbsp;@courseVM.Grade</h6>
+                        <br />
+                        <div class="d-flex flex-row align-content-center justify-content-around">
+                            <a class="btn btn-outline-light mt-auto btn-outline-yellow mr-4" asp-action="editCourse"
+                               asp-controller="Teacher" asp-route-courseid="@courseVM.CourseId">
+                                Editează
+                            </a>
+                            <a class="btn btn-outline-light mt-auto btn-outline-yellow" asp-action="ShowStudents"
+                               asp-controller="Teacher" asp-route-courseid="@courseVM.CourseId">
+                                Afișează studenții participanți
+                            </a>
+                        </div>
+                    </div>
 
+                </div>
+            }
+            <a class="btn btn-outline-light btn-outline-yellow" style="margin-top: 20px; width:auto" asp-controller="Teacher" asp-action="createCourse">
+                Adaugă un curs
+            </a>
+
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 id="deletedElement"></h3>
+                        <span class="close">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <p>Atenție! Ștergerea cursului determină eliminarea automată a studenților din fișa cursului</p>
+                    </div>
+                    <div class="modal-footer">
+                        <input id="courseid" type="hidden" />
+                        <button onclick="routeCourse();" class="btn btn-otuline-light btn-outline-yellow">Ok</button>
+                        <button id="giveUp" class="btn btn-otuline-light btn-outline-yellow">Renunță</button>
+                    </div>
+                </div>
             </div>
         }
-        <a class="btn btn-outline-light btn-outline-yellow"  style="margin-top: 20px; width:auto" asp-controller="Teacher" asp-action="createCourse">
-            Adaugă un curs
-        </a>
-    }
-    else
-    {
-        <div class="card text-dark">
-            <div class="card-header">
-                Nu s-au găsit cursuri predate
+        else
+        {
+            <div class="card text-dark">
+                <div class="card-header">
+                    Nu s-au găsit cursuri predate
+                </div>
+                <div class="card-body">
+                    <a class="btn btn-outline-light btn-outline-yellow mt-auto" style="width:auto" asp-controller="Teacher" asp-action="createCourse">
+                        Adaugă un curs
+                    </a>
+                </div>
             </div>
-            <div class="card-body">
-                <a class="btn btn-outline-light btn-outline-yellow mt-auto" style="width:auto" asp-controller="Teacher" asp-action="createCourse">
-                    Adaugă un curs
-                </a>
-            </div>
-        </div>
-    }
-</div>
+        }
+    </div>
 @section Scripts {
     <script src="~/js/removeNavbarCollapse.js"></script>
     <script src="~/js/colorTeacherPage.js"></script>
+    <script src="~/js/modal.js"></script>
+    <script>
+        function deleteCourse(name, courseid) {
+            deletedElement.innerHTML = "Stergeți cursul " + name + "?";
+            modal.style.display = "block";
+            document.getElementById("courseid").value = courseid;
+        }
+
+        function routeCourse() {
+            let courseid = document.getElementById("courseid").value;
+
+            let link = document.createElement("a");
+            link.setAttribute("href", "/Teacher/rmvcourse/" + courseid);
+            link.click();
+        }
+    </script>
     @if (member != null)
     {
         <script>

@@ -38,5 +38,35 @@ namespace GammaClient.Services
         {
             return await HttpMethods<CourseVM>.PostAsync(Client, course, "/createCourse");
         }
+
+        public async Task<List<StudentVM>> GetStudents(string courseid)
+        {
+            return await HttpMethods<List<StudentVM>>.GetAsync(Client, "/getStudents/" + courseid);
+        }
+
+        public async Task<List<StudentVM>> GetStudentsToJoinIn(string courseid, string schoolid)
+        {
+            return await HttpMethods<List<StudentVM>>.GetAsync(Client, "/getStudentsToJoinIn/" + courseid + "/" + schoolid);
+        }
+
+        public async Task<ResultVM> SubscribeStudents(SubscribeStudentsVM studentVMs)
+        {
+            return await HttpMethods<SubscribeStudentsVM>.PostAsync(Client, studentVMs, "/subscribeStudents");
+        }
+
+        public async Task<ResultVM> RemoveCourse(string courseid)
+        {
+            return await HttpMethods<ResultVM>.GetAsync(Client, "/removeCourse/" + courseid);
+        }
+
+        public async Task<List<MarkVM>> GetMarks(string studentid, string courseid)
+        {
+            return await HttpMethods<List<MarkVM>>.GetAsync(Client, "/getMarks/" + studentid + "/" + courseid);
+        }
+
+        public async Task<ResultVM> AddMark(MarkVM markVM)
+        {
+            return await HttpMethods<MarkVM>.PostAsync(Client, markVM, "/addMark");
+        }
     }
 }

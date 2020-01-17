@@ -1,0 +1,81 @@
+﻿@model IEnumerable<GammaClient.ViewModels.StudentVM>
+@inject GammaClient.Services.MemberClient _memberClient;
+
+@{
+    ViewData["Title"] = "ShowStudents";
+    var courseName = ViewBag.courseName;
+    var courseid = ViewBag.courseId;
+    var member = await _memberClient.GetCurrentClient();
+}
+
+    <div class="container mt-3 pb-3">
+        <h2>@courseName</h2>
+        <h4>Studenți înscriși</h4>
+
+        @if (Model.Any())
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Nume
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Grade)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FieldOfStudy)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Grade)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FieldOfStudy)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <hr style="border-color:#DDC649;" />
+            <p>Nu există studenți înscriși la acest curs</p>
+        }
+
+        
+        <a class="btn btn-outline-light btn-outline-yellow" asp-controller="Teacher" asp-action="SubscribeStudents" asp-route-courseid="@courseid">Înscrie studenți</a>
+        <br />
+        <br />
+        <a asp-controller="Teacher" asp-action="Index">Înapoi la lista de cursuri</a>
+
+    </div>
+@section Scripts {
+    <script src="~/js/removeNavbarCollapse.js"></script>
+    <script src="~/js/colorTeacherPage.js"></script>
+    @if (member != null)
+    {
+        <script>
+            var popi = document.getElementById("popi");
+            popi.title = '<span class="text-center d-block">@member.UserName</span>';
+            popi.setAttribute("data-content",
+                '<!DOCTYPE html><html><p class="text-center">@member.FirstName @member.LastName</p>' +
+                '<a href="../Account/Logout" class="btn btn-outline-light btn-outline-yellow">Deconectare</a></html>');
+        </script>
+    }
+    else
+    {
+        <script>
+            location.href = "../Account/Login";
+        </script>
+    }
+}

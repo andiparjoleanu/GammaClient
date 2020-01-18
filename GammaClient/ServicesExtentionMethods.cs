@@ -13,9 +13,7 @@ namespace GammaClient
         {
             services.AddHttpClient<AdministrationClient>();
             services.AddHttpClient<MemberClient>();
-            services.AddHttpClient<MarkClient>();
             services.AddHttpClient<SchoolClient>();
-            services.AddHttpClient<StudentClient>();
             services.AddHttpClient<TeacherClient>();
         }
     }

@@ -27,17 +27,18 @@ namespace GammaClient.Controllers
             if(member != null)
             {
                 RoleVM userRole = await _memberClient.GetCurrentClientInfo();
-                switch (userRole.RoleName) { 
-                    case "Administrator": return RedirectToAction("ShowAllRoles", "Administration");
-                    case "Director": return RedirectToAction("Index", "Principal");
-                    case "Profesor": return RedirectToAction("Index", "Teacher");
-                    default: return View(new IndexVM
+                return userRole.RoleName switch
+                {
+                    "Administrator" => RedirectToAction("ShowAllRoles", "Administration"),
+                    "Director" => RedirectToAction("Index", "Principal"),
+                    "Profesor" => RedirectToAction("Index", "Teacher"),
+                    _ => View(new IndexVM
                     {
                         Username = member.UserName,
                         Name = member.FirstName + " " + member.LastName,
                         Role = userRole.RoleName
-                    });
-                }
+                    }),
+                };
             }
 
             return View(new IndexVM

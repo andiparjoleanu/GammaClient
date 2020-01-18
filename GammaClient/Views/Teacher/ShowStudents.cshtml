@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GammaClient.ViewModels.StudentVM>
+﻿@model List<GammaClient.ViewModels.StudentVM>
 @inject GammaClient.Services.MemberClient _memberClient;
 
 @{
@@ -21,25 +21,32 @@
                             Nume
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Grade)
+                            Grupa
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.FieldOfStudy)
+                            Domeniu
                         </th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model)
+                    @for(int i = 0; i < Model.Count; i ++)
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
+                                @Model[i].FirstName @Model[i].LastName
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Grade)
+                                @Model[i].Grade
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.FieldOfStudy)
+                                @Model[i].FieldOfStudy
+                            </td>
+                            <td>
+                                <a asp-controller="Teacher" asp-action="ShowMarks" asp-route-studentid="@Model[i].MemberId" asp-route-courseid="@courseid"
+                                   class="btn btn-outline-light btn-outline-yellow">
+                                    Note
+                                </a>
                             </td>
                         </tr>
                     }

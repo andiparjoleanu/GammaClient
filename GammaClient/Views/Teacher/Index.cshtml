@@ -4,6 +4,8 @@
 @model IEnumerable<CourseVM>
 @{
     ViewData["Title"] = "Index";
+    var department = ViewBag.department;
+    var schoolid = ViewBag.teacherSchoolId;
     var member = await _memberClient.GetCurrentClient();
 }
 
@@ -61,16 +63,28 @@
         }
         else
         {
-            <div class="card text-dark">
-                <div class="card-header">
-                    Nu s-au găsit cursuri predate
+            if (schoolid != null && department != null)
+            {
+                <div class="card text-dark">
+                    <div class="card-header">
+                        Nu s-au găsit cursuri predate
+                    </div>
+                    <div class="card-body">
+                        <a class="btn btn-outline-light btn-outline-yellow mt-auto" style="width:auto" asp-controller="Teacher" asp-action="createCourse">
+                            Adaugă un curs
+                        </a>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <a class="btn btn-outline-light btn-outline-yellow mt-auto" style="width:auto" asp-controller="Teacher" asp-action="createCourse">
-                        Adaugă un curs
-                    </a>
+            }
+            else
+            {
+                <div class="card text-dark">
+                    <div class="card-body">
+                        Cont de profesor inactiv. Trebuie să predați la o școală existentă și să aparțineți unui departament!
+                    </div>
                 </div>
-            </div>
+            }
+
         }
     </div>
 @section Scripts {

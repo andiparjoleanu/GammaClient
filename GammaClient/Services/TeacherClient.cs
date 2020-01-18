@@ -34,6 +34,11 @@ namespace GammaClient.Services
             return await HttpMethods<CourseVM>.PutAsync(Client, course, "/editCourse");
         }
 
+        public async Task<TeacherVM> GetTeacherInfo(string teacherid)
+        {
+            return await HttpMethods<TeacherVM>.GetAsync(Client, "/getTeacherInfo/" + teacherid);
+        }
+
         public async Task<ResultVM> CreateCourse(CourseVM course)
         {
             return await HttpMethods<CourseVM>.PostAsync(Client, course, "/createCourse");

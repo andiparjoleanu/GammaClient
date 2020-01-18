@@ -25,6 +25,11 @@ namespace GammaClient.Controllers
             var member = await _memberClient.GetCurrentClient();
             if (member != null)
             {
+                ViewBag.teacherSchoolId = member.SchoolId;
+
+                var info = await _teacherClient.GetTeacherInfo(member.Id);
+                ViewBag.department = info.Department;
+
                 var courses = await _teacherClient.GetCourses(member.Id);
                 return View(courses);
             }

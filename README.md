@@ -20,7 +20,3 @@ Directorul general poate să înregistreze instituții de învățământ în si
 
 ### Profesor
 Un profesor poate să creeze cursuri, să înscrie studenți eligibili la curs și să atribuie studenților note pentru activitatea realizată în cadrul cursului. Profesorul primește aceste drepturi doar dacă un director general asociază contul profesorului cu o instituție înregistrată în sistem și cu un departament existent din cadrul instituției, întrucât cursurile sunt definite pentru un anumit domeniu de studiu și pentru o anumită grupă de studenți.
-
-## În curând
-### Rolul student
-Studentul va putea să vadă detalii despre cursurile la care este înscris.

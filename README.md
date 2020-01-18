@@ -3,7 +3,7 @@ Gamma este o aplicație web pentru gestionarea activităților didactice din cad
 Aplicația este definită pentru 5 categorii de utilizatori: utilizator musafir, membru inactiv, administrator, director general, profesor.
 
 ## Crearea unui cont
-Administratorul este cel care activează conturile membrilor noi, iar dacă în baza de date nu ar exista un administrator înainte ca un utilizator obișnuit să se înregistreze în sistem, contul său nu ar fi activat niciodată. Pentru această situație, am stabilit următoarea convenție: dacă nu există niciun utilizator înregistrat în baza de date, la primul cont creat se creează automat și rolul 'Administrator', iar contul este asignat acestui rolul. 
+Administratorul este cel care activează conturile membrilor noi, iar dacă în baza de date nu ar exista un administrator înainte ca un utilizator obișnuit să se înregistreze în sistem, contul său nu ar fi activat niciodată. Pentru această situație, am stabilit următoarea convenție: dacă nu există niciun utilizator înregistrat în baza de date, la primul cont creat, se creează automat și rolul 'Administrator', iar contul este asignat acestui rolul. 
 
 ## Roluri în aplicație
 ### Utilizatorul musafir

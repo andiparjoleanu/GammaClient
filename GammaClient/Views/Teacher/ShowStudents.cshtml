@@ -14,7 +14,7 @@
 
         @if (Model.Any())
         {
-            <table class="table">
+            <table class="table border-dark">
                 <thead>
                     <tr>
                         <th>
@@ -44,7 +44,7 @@
                             </td>
                             <td>
                                 <a asp-controller="Teacher" asp-action="ShowMarks" asp-route-studentid="@Model[i].MemberId" asp-route-courseid="@courseid"
-                                   class="btn btn-outline-light btn-outline-yellow">
+                                   class="btn btn-outline-dark">
                                     Note
                                 </a>
                             </td>
@@ -55,12 +55,12 @@
         }
         else
         {
-            <hr style="border-color:#DDC649;" />
+            <hr class="border-dark" />
             <p>Nu există studenți înscriși la acest curs</p>
         }
 
         
-        <a class="btn btn-outline-light btn-outline-yellow" asp-controller="Teacher" asp-action="SubscribeStudents" asp-route-courseid="@courseid">Înscrie studenți</a>
+        <a class="btn btn-outline-dark" asp-controller="Teacher" asp-action="SubscribeStudents" asp-route-courseid="@courseid">Înscrie studenți</a>
         <br />
         <br />
         <a asp-controller="Teacher" asp-action="Index">Înapoi la lista de cursuri</a>

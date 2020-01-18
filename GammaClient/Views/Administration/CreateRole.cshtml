@@ -7,27 +7,27 @@
 }
 
 <div class="container mt-3 pb-3">
-    <h3>Creează un rol Gamma</h3>
-    <hr />
+    <h3 class="text-light">Creează un rol Gamma</h3>
+    <hr class="border-light"/>
     <div class="row">
         <div class="col-md-4">
             <form asp-action="CreateRole">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="RoleName" class="control-label"></label>
-                    <input asp-for="RoleName" class="form-control" />
-                    <span asp-validation-for="RoleName" class="text-danger"></span>
+                    <label asp-for="RoleName" class="control-label text-light"></label>
+                    <input asp-for="RoleName" class="form-control bg-danger border-white text-light" />
+                    <span asp-validation-for="RoleName" class="text-light"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Creează" class="btn btn-danger" />
+                    <input type="submit" value="Creează" class="btn btn-outline-light" />
                 </div>
             </form>
-            <p class="error-message">@TempData["CreateRoleErrorMessage"]</p>
+            <p class="error-message-light">@TempData["CreateRoleErrorMessage"]</p>
         </div>
     </div>
 
     <div>
-        <a asp-action="showAllRoles">Înapoi la lista de roluri</a>
+        <a asp-action="showAllRoles" class="text-light">Înapoi la lista de roluri</a>
     </div>
 </div>
 
@@ -40,7 +40,7 @@
             popi.title = '<span class="text-center d-block">@member.UserName</span>';
             popi.setAttribute("data-content",
                 '<!DOCTYPE html><html><p class="text-center">@member.FirstName @member.LastName</p>' +
-                '<a href="../Account/Logout" class="btn btn-dark text-light">Deconectare</a></html>');
+                '<a href="../Account/Logout" class="btn btn-danger text-light">Deconectare</a></html>');
         </script>
     }
     else

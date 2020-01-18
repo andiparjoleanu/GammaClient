@@ -9,29 +9,29 @@
 
 <div class="container mt-3 pb-3">
     <h2>@Model.Name</h2>
-    <hr style="border-color:#DDC649;" />
+    <hr class="border-dark" />
     <h4>Editați specificațiile</h4>
     <div class="row">
         <div class="col-md-4">
             <form asp-action="EditCourse">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div asp-validation-summary="ModelOnly" class="text-dark"></div>
                 <input type="hidden" asp-for="CourseId" />
                 <input type="hidden" asp-for="Name" />
                 <div class="form-group">
                     <label asp-for="Description" class="control-label"></label>
-                    <textarea asp-for="Description" class="form-control"></textarea>
-                    <span asp-validation-for="Description" class="text-danger"></span>
+                    <textarea asp-for="Description" class="form-control border-dark" style="background-color:#EED75A"></textarea>
+                    <span asp-validation-for="Description" class="text-dark"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Grade" class="control-label"></label>
-                    <input asp-for="Grade" class="form-control" />
-                    <span asp-validation-for="Grade" class="text-danger"></span>
+                    <input asp-for="Grade" class="form-control border-dark" style="background-color:#EED75A" />
+                    <span asp-validation-for="Grade" class="text-dark"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Salvați modificările" class="btn btn-outline-light btn-outline-yellow" />
+                    <input type="submit" value="Salvați modificările" class="btn btn-outline-dark" />
                 </div>
             </form>
-            <p class="error-message">@TempData["updateCourseErrorMessage"]</p>
+            <p>@TempData["updateCourseErrorMessage"]</p>
         </div>
     </div>
 
@@ -50,7 +50,7 @@
             popi.title = '<span class="text-center d-block">@member.UserName</span>';
             popi.setAttribute("data-content",
                 '<!DOCTYPE html><html><p class="text-center">@member.FirstName @member.LastName</p>' +
-                '<a href="../Account/Logout" class="btn btn-danger text-light">Deconectare</a></html>');
+                '<a href="../Account/Logout" class="btn btn-outline-light btn-outline-yellow text-light">Deconectare</a></html>');
         </script>
     }
     else

@@ -16,7 +16,7 @@
 
     @if (Model.Any())
     {
-        <table class="table">
+        <table class="table border-dark">
             <thead>
                 <tr>
                     <th>
@@ -50,11 +50,11 @@
     }
     else
     {
-        <hr style="border-color:#DDC649;" />
+        <hr class="border-dark" />
         <p>Nu ați adăugat nicio notă</p>
     }
     <br />
-    <a asp-controller="Teacher" asp-action="AddMark" asp-route-courseid="@courseid" asp-route-studentid="@studentid" class="btn btn-outline-light btn-outline-yellow">Adăugati o notă</a>
+    <a asp-controller="Teacher" asp-action="AddMark" asp-route-courseid="@courseid" asp-route-studentid="@studentid" class="btn btn-outline-dark">Adăugați o notă</a>
     <br />
     <br />
     <a asp-controller="Teacher" asp-action="ShowStudents" asp-route-courseid="@courseid">Înapoi la lista de studenți</a>

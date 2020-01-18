@@ -9,9 +9,9 @@
 }
 
 <div class="container mt-3 pb-3">
-    <h2 class="text-light">@schoolName</h2>
-    <h4 class="text-light">Adaugați studenți în catalogul instituției</h4>
-    <hr style="border-color:aliceblue;" />
+    <h2 class="text-primary">@schoolName</h2>
+    <h4 class="text-primary">Adaugați studenți în catalogul instituției</h4>
+    <hr class="border-primary" />
 
     @if (Model.Any())
     {
@@ -27,7 +27,7 @@
                                 <input type="hidden" asp-for="@Model[i].LastName" />
                                 <input type="hidden" asp-for="@Model[i].MemberId" />
                                 <input type="checkbox" class="custom-control-input" asp-for="@Model[i].IsSelected" />
-                                <label class="custom-control-label text-light" asp-for="@Model[i].IsSelected">
+                                <label class="custom-control-label text-primary" asp-for="@Model[i].IsSelected">
                                     @Model[i].FirstName @Model[i].LastName
                                 </label>
                             </div>
@@ -35,11 +35,11 @@
                     </div>
                     <input type="hidden" asp-for="@schoolId" />
                     <div class="form-group mt-5">
-                        <input type="submit" value="Salvează modificările" class="btn btn-light" />
+                        <input type="submit" value="Salvează modificările" class="btn btn-outline-primary" />
                     </div>
 
                     <div>
-                        <p class="text-light">@TempData["addStudentsErrorMessage"]</p>
+                        <p class="error-message">@TempData["addStudentsErrorMessage"]</p>
                     </div>
                 </div>
             </div>
@@ -47,10 +47,10 @@
     }
     else
     {
-        <p class="text-light">Nu mai există studenți înscriși</p>
+        <p class="text-primary">Nu mai există studenți înscriși</p>
     }
     <div>
-        <a class="btn btn-light mt-auto" asp-action="ShowStudents" asp-route-schoolid="@schoolId">Înapoi la lista de studenți</a>
+        <a class="btn btn-outline-primary mt-auto" asp-action="ShowStudents" asp-route-schoolid="@schoolId">Înapoi la lista de studenți</a>
     </div>
 </div>
 

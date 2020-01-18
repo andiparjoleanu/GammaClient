@@ -8,23 +8,23 @@
 }
 
 <div class="container mt-3 pb-3">
-    <h2 class="text-light">@schoolName</h2>
-    <hr style="border-color:white;" />
-    <h3 class="text-white">@Model.FirstName @Model.LastName</h3>
-    <h5 class="text-white">Editează informațiile</h5>
+    <h2 class="text-primary">@schoolName</h2>
+    <hr class="border-primary" />
+    <h3 class="text-primary">@Model.FirstName @Model.LastName</h3>
+    <h5 class="text-primary">Editează informațiile</h5>
     <br />
     <div class="row">
         <div class="col-md-4">
             <form asp-action="EditStudent">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="Grade" class="control-label text-light"></label>
-                    <input asp-for="Grade" value="@Model.Grade" class="form-control" />
+                    <label asp-for="Grade" class="control-label text-primary"></label>
+                    <input asp-for="Grade" value="@Model.Grade" class="form-control border-primary" />
                     <span asp-validation-for="Grade" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="FieldOfStudy" class="control-label text-light"></label>
-                    <input asp-for="FieldOfStudy" value="@Model.FieldOfStudy" class="form-control" />
+                    <label asp-for="FieldOfStudy" class="control-label text-primary"></label>
+                    <input asp-for="FieldOfStudy" value="@Model.FieldOfStudy" class="form-control border-primary" />
                     <span asp-validation-for="FieldOfStudy" class="text-danger"></span>
                 </div>
                 <input type="hidden" asp-for="MemberId" />
@@ -32,14 +32,14 @@
                 <input type="hidden" asp-for="LastName" />
                 <input type="hidden" asp-for="SchoolId" />
                 <div class="form-group">
-                    <input type="submit" value="Salvează modificările" class="btn btn-light" />
+                    <input type="submit" value="Salvează modificările" class="btn btn-outline-primary" />
                 </div>
             </form>
         </div>
     </div>
 
     <div>
-        <a asp-action="ShowStudents" asp-route-schoolid="@Model.SchoolId" class="text-light">Înapoi la lista de studenți</a>
+        <a asp-action="ShowStudents" asp-route-schoolid="@Model.SchoolId" class="text-primary">Înapoi la lista de studenți</a>
     </div>
 </div>
 

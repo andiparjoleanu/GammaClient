@@ -5,36 +5,39 @@
 }
 
 <div class="container mt-3 pb-3">
-    <h4>Haide să învățăm împreună!</h4>
-    <hr />
+    <h4 class="text-light">Haide să învățăm împreună!</h4>
+    <hr class="border-light"/>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 text-light">
             <form asp-action="Login" asp-controller="Account">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div asp-validation-summary="ModelOnly" class="text-light"></div>
                 <div class="form-group">
                     <label asp-for="UserName" class="control-label"></label>
-                    <input asp-for="UserName" class="form-control" />
-                    <span asp-validation-for="UserName" class="text-danger"></span>
+                    <input asp-for="UserName" class="form-control border-light text-light" style="background-color:darkcyan;"/>
+                    <span asp-validation-for="UserName" class="text-light"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Password" class="control-label"></label>
-                    <input asp-for="Password" class="form-control" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
+                    <input asp-for="Password" class="form-control border-light text-light" style="background-color:darkcyan;" />
+                    <span asp-validation-for="Password" class="text-light"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Autentificare" class="btn btn-primary" />
+                    <input type="submit" value="Autentificare" class="btn btn-outline-light" />
                 </div>
             </form>
         </div>
         <div class="col-md-3 col-lg-4"></div>
-        <div class="col-md-5 col-lg-4 d-none d-md-block gamma-container container-bg-responsive"></div>
+        <div class="col-md-5 col-lg-4 d-none d-md-block gamma-container-2 container-bg-responsive"></div>
     </div>
 
     <p class="error-message">@TempData["TrySignInErrorMessage"]</p>
-    <p>Nu ai cont? <a asp-action="Register" asp-controller="Account">Înregistrează-te!</a></p>
+    <p class="text-light">Nu ai cont? <a asp-action="Register" asp-controller="Account">Înregistrează-te!</a></p>
 </div>
 
 @section Scripts {
     <script src="~/js/styleLoginPage.js"></script>
+    <script>
+        document.body.style.backgroundColor = "darkcyan";
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -10,34 +10,34 @@
     <div class="container mt-3 pb-3">
         @if (Model.Any())
         {
-            <h2>Utilizatori activi Gamma</h2>
-            <hr />
+            <h2 class="text-light">Utilizatori activi Gamma</h2>
+            <br/>
             foreach (var editRoleVM in Model)
             {
-                <div class="card border-danger h-100 mt-3 w3-animate-opacity">
-                    <div class="modal-header">
-                        <h3 class="text-danger">@editRoleVM.RoleName</h3>
+                <div class="card border-light h-100 mt-4 w3-animate-opacity">
+                    <div class="modal-header bg-danger">
+                        <h3 class="text-light">@editRoleVM.RoleName</h3>
                         @if (editRoleVM.RoleName != "Administrator")
                         {
-                            <span class="my-close" onclick="deleteRole('@editRoleVM.RoleName', '@editRoleVM.RoleId')">&times;</span>
+                            <span class="my-close text-light" onclick="deleteRole('@editRoleVM.RoleName', '@editRoleVM.RoleId')">&times;</span>
                         }
                     </div>
-                    <div class="card-body d-flex flex-column align-items-start">
+                    <div class="card-body bg-danger d-flex flex-column align-items-start">
                         @if (editRoleVM.Users.Any())
                         {
                             foreach (var user in editRoleVM.Users)
                             {
-                                <p class="card-text">@user</p>
+                                <p class="card-text text-light">@user</p>
                             }
                         }
                         else
                         {
-                            <p class="card-text">
+                            <p class="card-text text-light">
                                 Nu există utilizatori înregistrați pentru acest rol
                             </p>
                         }
 
-                        <a class="btn btn-outline-danger mt-auto" asp-action="editRole"
+                        <a class="btn btn-outline-light mt-auto" asp-action="editRole"
                            asp-controller="Administration" asp-route-roleid="@editRoleVM.RoleId">
                             Editează
                         </a>
@@ -63,13 +63,13 @@
                 </div>
             </div>
 
-            <a class="btn btn-danger" style="margin-top: 20px; width:auto" asp-controller="Administration" asp-action="createRole">
+            <a class="btn btn-outline-light" style="margin-top: 20px; width:auto" asp-controller="Administration" asp-action="createRole">
                 Creează un rol
             </a>
         }
         else
         {
-            <div class="card bg-danger text-white">
+            <div class="card bg-light text-dark">
                 <div class="card-header">
                     Niciun rol nu a fost încă creat
                 </div>

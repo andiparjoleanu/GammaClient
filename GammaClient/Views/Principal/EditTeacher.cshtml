@@ -8,18 +8,18 @@
 }
 
 <div class="container mt-3 pb-3">
-    <h2 class="text-light">@schoolName</h2>
-    <hr style="border-color:white;" />
-    <h3 class="text-white">@Model.FirstName @Model.LastName</h3>
-    <h5 class="text-white">Editează informațiile</h5>
+    <h2 class="text-primary">@schoolName</h2>
+    <hr class="border-primary" />
+    <h3 class="text-primary">@Model.FirstName @Model.LastName</h3>
+    <h5 class="text-primary">Editează informațiile</h5>
     <br />
     <div class="row">
         <div class="col-md-4">
             <form asp-action="EditTeacher">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="Department" class="control-label text-light"></label>
-                    <input asp-for="Department" value="@Model.Department" class="form-control" />
+                    <label asp-for="Department" class="control-label text-primary"></label>
+                    <input asp-for="Department" value="@Model.Department" class="form-control border-primary" />
                     <span asp-validation-for="Department" class="text-danger"></span>
                 </div>
                 <input type="hidden" asp-for="MemberId" />
@@ -27,14 +27,14 @@
                 <input type="hidden" asp-for="LastName" />
                 <input type="hidden" asp-for="SchoolId" />
                 <div class="form-group">
-                    <input type="submit" value="Salvează modificările" class="btn btn-light" />
+                    <input type="submit" value="Salvează modificările" class="btn btn-outline-primary" />
                 </div>
             </form>
         </div>
     </div>
 
     <div>
-        <a asp-action="ShowTeachers" asp-route-schoolid="@Model.SchoolId" class="text-light">Înapoi la lista de profesori</a>
+        <a asp-action="ShowTeachers" asp-route-schoolid="@Model.SchoolId" class="text-primary">Înapoi la lista de profesori</a>
     </div>
 </div>
 

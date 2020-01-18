@@ -91,6 +91,10 @@ body {
     background-image: url('/assets/gammaLogo.PNG');
 }
 
+.gamma-container-2 {
+    background-image: url('/assets/gammaLogo2.PNG');
+}
+
 .gamma-subscribe {
     background-image: url('/assets/gammaSubscribe.jpg');
     height: 200px;

@@ -1,4 +1,6 @@
-﻿var navbar = document.getElementsByTagName("nav");
+﻿document.body.classList.add("bg-danger");
+
+var navbar = document.getElementsByTagName("nav");
 navbar[0].classList.remove("bg-primary");
 navbar[0].classList.add("bg-danger");
 

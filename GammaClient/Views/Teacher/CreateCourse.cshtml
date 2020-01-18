@@ -9,27 +9,27 @@
 
 <div class="container mt-3 pb-3">
     <h2>Creați un curs</h2>
-    <hr style="border-color:#DDC649;" />
+    <hr class="border-dark" />
     <div class="row">
         <div class="col-md-4">
             <form asp-action="CreateCourse">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div asp-validation-summary="ModelOnly" class="text-dark"></div>
                 <input type="hidden" asp-for="CourseId" />
                 <input type="hidden" asp-for="TeacherId" value="@teacherId" />
                 <div class="form-group">
                     <label asp-for="Grade" class="control-label"></label>
-                    <input asp-for="Grade" class="form-control" />
-                    <span asp-validation-for="Grade" class="text-danger"></span>
+                    <input asp-for="Grade" class="form-control border-dark" style="background-color:#EED75A"/>
+                    <span asp-validation-for="Grade" class="text-dark"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Name" class="control-label"></label>
-                    <input asp-for="Name" class="form-control" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <input asp-for="Name" class="form-control border-dark" style="background-color:#EED75A"/>
+                    <span asp-validation-for="Name" class="text-dark"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Description" class="control-label"></label>
-                    <input asp-for="Description" class="form-control" />
-                    <span asp-validation-for="Description" class="text-danger"></span>
+                    <input asp-for="Description" class="form-control border-dark" style="background-color:#EED75A" />
+                    <span asp-validation-for="Description" class="text-dark"></span>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Creează" class="btn btn-outline-light btn-outline-yellow" />

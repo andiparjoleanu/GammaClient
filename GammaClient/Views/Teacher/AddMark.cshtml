@@ -14,26 +14,26 @@
     <div class="row">
         <div class="col-md-6">
             <form asp-action="AddMark">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div asp-validation-summary="ModelOnly" class="text-dark"></div>
                 <div class="form-group">
                     <label asp-for="Date" class="control-label"></label>
-                    <input asp-for="Date" class="form-control" />
-                    <span asp-validation-for="Date" class="text-danger"></span>
+                    <input asp-for="Date" class="form-control border-dark" style="background-color:#EED75A" />
+                    <span asp-validation-for="Date" class="text-dark"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Value" class="control-label"></label>
-                    <input asp-for="Value" class="form-control" />
-                    <span asp-validation-for="Value" class="text-danger"></span>
+                    <input asp-for="Value" class="form-control border-dark" style="background-color:#EED75A" />
+                    <span asp-validation-for="Value" class="text-dark"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Note" class="control-label"></label>
-                    <input asp-for="Note" class="form-control" />
-                    <span asp-validation-for="Note" class="text-danger"></span>
+                    <input asp-for="Note" class="form-control badge border-dark" style="background-color:#EED75A" />
+                    <span asp-validation-for="Note" class="text-dark"></span>
                 </div>
                 <input type="hidden" asp-for="StudentId" value="@studentid" />
                 <input type="hidden" asp-for="CourseId" value="@courseid" />
                 <div class="form-group">
-                    <input type="submit" value="Adaugă" class="btn btn-outline-light btn-outline-yellow" />
+                    <input type="submit" value="Adaugă" class="btn btn-outline-dark" />
                 </div>
             </form>
         </div>

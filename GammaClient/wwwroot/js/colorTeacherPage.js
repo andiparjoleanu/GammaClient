@@ -1,5 +1,5 @@
 ﻿let bodyColor = "white";
-document.body.style.backgroundColor = bodyColor;
+document.body.style.backgroundColor = "#EED75A";
 
 var navbar = document.getElementsByTagName("nav");
 navbar[0].classList.remove("bg-primary");

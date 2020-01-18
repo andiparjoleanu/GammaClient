@@ -9,11 +9,11 @@
 }
 
 <div class="container mt-3 pb-3">
-    <h2 class="text-light">@schoolName</h2>
-    <h4 class="text-light">Cadre didactice</h4>
+    <h2 class="text-primary">@schoolName</h2>
+    <h4 class="text-primary">Cadre didactice</h4>
     @if (Model.Any())
     {
-        <table class="table table-responsive-sm text-light" style="border-color:aliceblue;">
+        <table class="table table-responsive-sm text-primary border-primary">
             <thead>
                 <tr>
                     <th>
@@ -29,18 +29,18 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td class="text-light">
+                    <tr  class="text-primary">
+                        <td>
                             @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
                         </td>
-                        <td class="text-light">
+                        <td>
                             @Html.DisplayFor(modelItem => item.Department)
                         </td>
-                        <td class="text-light">
-                            <a class="text-light" asp-action="EditTeacher" asp-controller="Principal" asp-route-teacherid="@item.MemberId" asp-route-schoolid="@schoolId">Editează</a>
+                        <td>
+                            <a class="text-primary" asp-action="EditTeacher" asp-controller="Principal" asp-route-teacherid="@item.MemberId" asp-route-schoolid="@schoolId">Editează</a>
                         </td>
-                        <td class="text-light">
-                            <a href="#" class="text-light" onclick="deleteInfo('@item.FirstName @item.LastName', '@item.MemberId', '@item.SchoolId');">
+                        <td>
+                            <a href="#" class="text-primary" onclick="deleteInfo('@item.FirstName @item.LastName', '@item.MemberId', '@item.SchoolId');">
                                 Șterge
                             </a>
                         </td>
@@ -73,13 +73,13 @@
     else
     {
         <hr style="border-color:aliceblue;" />
-        <p class="text-light">Nu există profesori înregistrați pentru această instituție</p>
+        <p class="text-primary">Nu există profesori înregistrați pentru această instituție</p>
     }
 
-    <a asp-action="AddTeachers" class="btn btn-light" asp-route-schoolid="@schoolId">Adaugă profesori</a>
+    <a asp-action="AddTeachers" class="btn btn-outline-primary" asp-route-schoolid="@schoolId">Adaugă profesori</a>
     <br />
     <br />
-    <a asp-action="Index" class="text-light">Întoarce-te la pagina principală</a>
+    <a asp-action="Index" class="text-primary">Întoarce-te la pagina principală</a>
 </div>
 
 @section Scripts {

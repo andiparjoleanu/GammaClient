@@ -21,32 +21,95 @@ namespace GammaClient.Services
 
         public async Task<ResultVM> RemoveRole(string roleid)
         {
-            return await HttpMethods<ResultVM>.GetAsync(Client, "/removeRole/" + roleid);
+            try
+            {
+                ResultVM result = await HttpMethods<ResultVM>.GetAsync(Client, "/removeRole/" + roleid);
+                return result;
+            }
+            catch (Exception e)
+            {
+                return new ResultVM
+                {
+                    Message = e.Message,
+                    Status = Status.Error
+                };
+            }
         }
 
         public async Task<ResultVM> CreateRole(RoleVM roleVM)
         {
-            return await HttpMethods<RoleVM>.PostAsync(Client, roleVM, "/createRole");
+            try
+            {
+                ResultVM result = await HttpMethods<RoleVM>.PostAsync(Client, roleVM, "/createRole");
+                return result;
+            }
+            catch (Exception e)
+            {
+                return new ResultVM
+                {
+                    Message = e.Message,
+                    Status = Status.Error
+                };
+            }
+
         }
 
         public async Task<List<IdentityRole>> GetRolesList()
         {
-            return await HttpMethods<List<IdentityRole>>.GetAsync(Client, "/getRolesList");
+            try 
+            {
+                List<IdentityRole> roles = await HttpMethods<List<IdentityRole>>.GetAsync(Client, "/getRolesList");
+                return roles;
+            }
+            catch (Exception)
+            {
+                return new List<IdentityRole>();
+            }
         }
 
         public async Task<List<EditRoleVM>> GetAllRoles()
         {
-            return await HttpMethods<List<EditRoleVM>>.GetAsync(Client, "/getAllRoles");
+            try
+            {
+                List<EditRoleVM> roles = await HttpMethods<List<EditRoleVM>>.GetAsync(Client, "/getAllRoles");
+                return roles;
+            }
+            catch (Exception)
+            {
+                return new List<EditRoleVM>();
+            }
+
         }
 
         public async Task<List<AddUserRoleVM>> GetUsersWithoutRoles(string roleId)
         {
-            return await HttpMethods<List<AddUserRoleVM>>.GetAsync(Client, "/getUsersWithoutRole/" + roleId);
+            try
+            {
+                List<AddUserRoleVM> model = await HttpMethods<List<AddUserRoleVM>>.GetAsync(Client, "/getUsersWithoutRole/" + roleId);
+                return model;
+            }
+            catch (Exception e)
+            {
+                return new List<AddUserRoleVM>();
+            }
+
         }
 
         public async Task<ResultVM> SaveUserRoles(UpdateUserRolesVM razorModel)
         {
-            return await HttpMethods<UpdateUserRolesVM>.PostAsync(Client, razorModel, "/saveUserRoles");
+            try
+            {
+                ResultVM result = await HttpMethods<UpdateUserRolesVM>.PostAsync(Client, razorModel, "/saveUserRoles");
+                return result;
+            }
+            catch (Exception e)
+            {
+                return new ResultVM
+                {
+                    Message = e.Message,
+                    Status = Status.Error
+                };
+            }
         }
     }
 }

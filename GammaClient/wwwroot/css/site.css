@@ -199,21 +199,21 @@ body {
 }
 
 .btn-outline-yellow {
-    border-color: #DDC649;
-    color: #DDC649;
+    border-color: #ccb538;
+    color: #ccb538;
 }
 
     .btn-outline-yellow:hover {
         color: white;
-        background-color: #DDC649;
+        background-color: #ccb538;
     }
 
 .btn-yellow {
-    background-color: #DDC649;
+    background-color: #ccb538;
     color: white;
 }
 
-.btn-yellow:hover {
-    background-color: #DDC649;
-    color: white;
-}
+    .btn-yellow:hover {
+        background-color: #ccb538;
+        color: white;
+    }

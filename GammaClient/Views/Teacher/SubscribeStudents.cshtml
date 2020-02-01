@@ -2,15 +2,22 @@
 @inject GammaClient.Services.MemberClient _memberClient;
 
 @{
-    ViewData["Title"] = "SubscribeStudents";
+    ViewData["Title"] = "Înscrie Studenți";
     var member = await _memberClient.GetCurrentClient();
     var courseid = ViewBag.courseId;
     var courseName = ViewBag.courseName;
 }
 
-    <div class="container mt-3 pb-3">
-        <h2>@courseName</h2>
-        <hr class="border-dark" />
+    <div style="background-color:#EED75A" class="container-fluid text-dark pt-3 pb-4">
+        <div class="container">
+            <h2>@courseName</h2>
+            <hr class="border-dark" />
+            <h4>Înscrieți studenți la curs</h4>
+        </div>
+    </div>
+
+    <div class="container pt-3 pb-3">
+        
         @if (Model.Any())
         {
             <form method="post" asp-action="SubscribeStudents">

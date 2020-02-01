@@ -2,7 +2,7 @@
 @inject GammaClient.Services.MemberClient _memberClient;
 
 @{
-    ViewData["Title"] = "ShowMarks";
+    ViewData["Title"] = "Note";
     var studentName = ViewBag.studentName;
     var courseName = ViewBag.courseName;
     var studentid = ViewBag.studentid;
@@ -10,9 +10,14 @@
     var member = await _memberClient.GetCurrentClient();
 }
 
+<div style="background-color:#EED75A" class="container-fluid text-dark pt-3 pb-4">
+    <div class="container">
+        <h2>@studentName</h2>
+        <hr class="border-dark" />
+        <h4>Note la disciplina @courseName</h4>
+    </div>
+</div>
 <div class="container mt-3 pb-3">
-    <h2>@studentName</h2>
-    <h4>Note la disciplina @courseName</h4>
 
     @if (Model.Any())
     {
@@ -50,11 +55,10 @@
     }
     else
     {
-        <hr class="border-dark" />
         <p>Nu ați adăugat nicio notă</p>
     }
     <br />
-    <a asp-controller="Teacher" asp-action="AddMark" asp-route-courseid="@courseid" asp-route-studentid="@studentid" class="btn btn-outline-dark">Adăugați o notă</a>
+    <a asp-controller="Teacher" asp-action="AddMark" asp-route-courseid="@courseid" asp-route-studentid="@studentid" class="btn btn-outline-light btn-outline-yellow">Adăugați o notă</a>
     <br />
     <br />
     <a asp-controller="Teacher" asp-action="ShowStudents" asp-route-courseid="@courseid">Înapoi la lista de studenți</a>
@@ -69,7 +73,7 @@
             popi.title = '<span class="text-center d-block">@member.UserName</span>';
             popi.setAttribute("data-content",
                 '<!DOCTYPE html><html><p class="text-center">@member.FirstName @member.LastName</p>' +
-                '<a href="../Account/Logout" class="btn btn-outline-light btn-outline-yellow">Deconectare</a></html>');
+                '<a href="../../../Account/Logout" class="btn btn-outline-light btn-outline-yellow">Deconectare</a></html>');
         </script>
     }
     else

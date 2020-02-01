@@ -2,15 +2,21 @@
 @inject GammaClient.Services.MemberClient _memberClient;
 
 @{
-    ViewData["Title"] = "ShowTeachers";
+    ViewData["Title"] = "Profesori";
     var schoolName = ViewBag.showTeachersSchool;
     var schoolId = ViewBag.schoolId;
     var member = await _memberClient.GetCurrentClient();
 }
 
+
+<div class="container-fluid bg-primary text-light pt-3 pb-4">
+    <div class="container">
+        <h2 class="text-white">@schoolName</h2>
+        <hr class="border-white"/>
+        <h4 class="text-white">Cadre didactice</h4>
+    </div>
+</div>
 <div class="container mt-3 pb-3">
-    <h2 class="text-primary">@schoolName</h2>
-    <h4 class="text-primary">Cadre didactice</h4>
     @if (Model.Any())
     {
         <table class="table table-responsive-sm text-primary border-primary">

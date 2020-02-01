@@ -2,13 +2,16 @@
 @inject GammaClient.Services.MemberClient _memberClient;
 
 @{
-    ViewData["Title"] = "AddSchool";
+    ViewData["Title"] = "Adaugă Instituție";
     var member = await _memberClient.GetCurrentClient();
 }
 
+<div class="container-fluid bg-primary text-light pt-3 pb-4">
+    <div class="container">
+        <h2 class="text-white">Adaugă o instituție de învățământ</h2>
+    </div>
+</div>
 <div class="container mt-3 pb-3">
-    <h4 class="text-primary">Adaugă o școală în baza de date Gamma</h4>
-    <hr class="border-primary" />
     <div class="row text-primary">
         <div class="col-md-4">
             <form asp-action="AddSchool">

@@ -1,4 +1,4 @@
-﻿document.body.classList.add("bg-danger");
+﻿//document.body.classList.add("bg-danger");
 
 var navbar = document.getElementsByTagName("nav");
 navbar[0].classList.remove("bg-primary");
@@ -6,7 +6,7 @@ navbar[0].classList.add("bg-danger");
 
 var footer = document.getElementsByTagName("footer");
 footer[0].classList.remove("bg-primary");
-footer[0].classList.add("bg-danger");
+footer[0].classList.add("text-dark");
 
 var navbarNav = document.getElementsByClassName("navbar-nav");
 

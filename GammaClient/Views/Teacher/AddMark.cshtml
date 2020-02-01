@@ -2,38 +2,41 @@
 @inject GammaClient.Services.MemberClient _memberClient;
 
 @{
-    ViewData["Title"] = "AddMark";
+    ViewData["Title"] = "Note";
     var studentid = ViewBag.studentid;
     var courseid = ViewBag.courseid;
     var member = await _memberClient.GetCurrentClient();
 }
 
+<div style="background-color:#EED75A" class="container-fluid text-dark pt-3 pb-4">
+    <div class="container">
+        <h2>Adaugă un calificativ</h2>
+    </div>
+</div>
 <div class="container mt-3 pb-3">
-    <h2>Adaugă o notă</h2>
-    <hr style="border-color:#DDC649;" />
     <div class="row">
         <div class="col-md-6">
             <form asp-action="AddMark">
                 <div asp-validation-summary="ModelOnly" class="text-dark"></div>
                 <div class="form-group">
                     <label asp-for="Date" class="control-label"></label>
-                    <input asp-for="Date" class="form-control border-dark" style="background-color:#EED75A" />
+                    <input asp-for="Date" class="form-control border-dark" />
                     <span asp-validation-for="Date" class="text-dark"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Value" class="control-label"></label>
-                    <input asp-for="Value" class="form-control border-dark" style="background-color:#EED75A" />
+                    <input asp-for="Value" class="form-control border-dark" />
                     <span asp-validation-for="Value" class="text-dark"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Note" class="control-label"></label>
-                    <input asp-for="Note" class="form-control badge border-dark" style="background-color:#EED75A" />
+                    <input asp-for="Note" class="form-control border-dark" />
                     <span asp-validation-for="Note" class="text-dark"></span>
                 </div>
                 <input type="hidden" asp-for="StudentId" value="@studentid" />
                 <input type="hidden" asp-for="CourseId" value="@courseid" />
                 <div class="form-group">
-                    <input type="submit" value="Adaugă" class="btn btn-outline-dark" />
+                    <input type="submit" value="Adaugă" class="btn btn-outline-light btn-outline-yellow" />
                 </div>
             </form>
         </div>
@@ -52,7 +55,7 @@
             popi.title = '<span class="text-center d-block">@member.UserName</span>';
             popi.setAttribute("data-content",
                 '<!DOCTYPE html><html><p class="text-center">@member.FirstName @member.LastName</p>' +
-                '<a href="../Account/Logout" class="btn btn-outline-light btn-outline-yellow">Deconectare</a></html>');
+                '<a href="../../../Account/Logout" class="btn btn-outline-light btn-outline-yellow">Deconectare</a></html>');
         </script>
     }
     else

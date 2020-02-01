@@ -2,14 +2,18 @@
 @inject GammaClient.Services.MemberClient _memberClient;
 
 @{
-    ViewData["Title"] = "EditRole";
+    ViewData["Title"] = "Editează Rol";
     var roleid = ViewBag.RoleId;
     var member = await _memberClient.GetCurrentClient();
 }
 
+<div class="container-fluid bg-danger text-light pt-3 pb-4">
+    <div class="container">
+        <h2>Adaugă utilizatori pentru acest rol</h2>
+    </div>
+</div>
+
 <div class="container mt-3 pb-3">
-    <h3 class="text-light">Adaugă utilizatori pentru acest rol</h3>
-    <hr class="border-light"/>
 
     @if (Model.Any())
     {
@@ -24,7 +28,7 @@
                                 <input type="hidden" asp-for="@Model[i].FullName" />
                                 <input type="hidden" asp-for="@Model[i].Name" />
                                 <input type="checkbox" class="custom-control-input" asp-for="@Model[i].IsSelected" />
-                                <label class="custom-control-label text-light" asp-for="@Model[i].IsSelected">
+                                <label class="custom-control-label" asp-for="@Model[i].IsSelected">
                                     @Model[i].FullName (@Model[i].Name)
                                 </label>
                             </div>
@@ -32,11 +36,11 @@
                     </div>
                     <input type="hidden" asp-for="@roleid" />
                     <div class="form-group mt-5">
-                        <input type="submit" value="Salvează modificările" class="btn btn-outline-light" />
+                        <input type="submit" value="Salvează modificările" class="btn btn-outline-danger" />
                     </div>
 
                     <div>
-                        <p class="error-message-light">@TempData["updateRolesErrorMessage"]</p>
+                        <p class="error-message">@TempData["updateRolesErrorMessage"]</p>
                     </div>
                 </div>
             </div>
@@ -44,10 +48,10 @@
     }
     else
     {
-        <p class="text-light">Toți utilizatorii au un rol atribuit</p>
+        <p>Toți utilizatorii au un rol atribuit</p>
     }
     <div>
-        <a class="btn btn-outline-light mt-auto" asp-action="ShowAllRoles">Înapoi la lista de roluri</a>
+        <a class="mt-auto" asp-action="ShowAllRoles">Înapoi la lista de roluri</a>
     </div>
 </div>
 

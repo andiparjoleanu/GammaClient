@@ -2,17 +2,20 @@
 @inject GammaClient.Services.MemberClient _memberClient;
 
 @{
-    ViewData["Title"] = "EditTeacher";
+    ViewData["Title"] = "Student";
     var schoolName = ViewBag.showTeachersSchool;
     var member = await _memberClient.GetCurrentClient();
 }
 
+<div class="container-fluid bg-primary text-light pt-3 pb-4">
+    <div class="container">
+        <h2 class="text-white">@schoolName</h2>
+        <hr class="border-light" />
+        <h3 class="text-white">@Model.FirstName @Model.LastName</h3>
+        <h5 class="text-white">Editează informațiile</h5>
+    </div>
+</div>
 <div class="container mt-3 pb-3">
-    <h2 class="text-primary">@schoolName</h2>
-    <hr class="border-primary" />
-    <h3 class="text-primary">@Model.FirstName @Model.LastName</h3>
-    <h5 class="text-primary">Editează informațiile</h5>
-    <br />
     <div class="row">
         <div class="col-md-4">
             <form asp-action="EditStudent">

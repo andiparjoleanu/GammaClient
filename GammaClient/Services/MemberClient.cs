@@ -28,22 +28,66 @@ namespace GammaClient.Services
 
         public async Task<RoleVM> GetCurrentClientInfo()
         {
-            return await HttpMethods<RoleVM>.GetAsync(Client, "/currentClientInfo");
+            try 
+            {
+                RoleVM role = await HttpMethods<RoleVM>.GetAsync(Client, "/currentClientInfo");
+                return role;
+            }
+            catch(Exception)
+            {
+                return new RoleVM { };
+            }
         }
 
         public async Task<ResultVM> Logout()
         {
-            return await HttpMethods<ResultVM>.GetAsync(Client, "/logout");
+            try 
+            {
+                ResultVM result = await HttpMethods<ResultVM>.GetAsync(Client, "/logout");
+                return result;
+            }
+            catch(Exception e)
+            {
+                return new ResultVM
+                {
+                    Message = e.Message,
+                    Status = Status.Error
+                };
+            }
         }
 
         public async Task<ResultVM> Login(LoginVM loginVM)
         {
-            return await HttpMethods<LoginVM>.PostAsync(Client, loginVM, "/login");
+            try 
+            {
+                ResultVM result = await HttpMethods<LoginVM>.PostAsync(Client, loginVM, "/login");
+                return result;
+            }
+            catch (Exception e)
+            {
+                return new ResultVM
+                {
+                    Message = e.Message,
+                    Status = Status.Error
+                };
+            }
         }
 
         public async Task<ResultVM> Register(RegisterVM registerVM)
         {
-            return await HttpMethods<RegisterVM>.PostAsync(Client, registerVM, "/register");
+            try 
+            {
+                ResultVM result =  await HttpMethods<RegisterVM>.PostAsync(Client, registerVM, "/register");
+                return result;
+            }
+            catch (Exception e)
+            {
+                return new ResultVM
+                {
+                    Message = e.Message,
+                    Status = Status.Error
+                };
+            }
         }
     }
 }

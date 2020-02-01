@@ -2,70 +2,74 @@
 @inject GammaClient.Services.MemberClient _memberClient;
 
 @{
-    ViewData["Title"] = "ShowStudents";
+    ViewData["Title"] = "Studenți";
     var courseName = ViewBag.courseName;
     var courseid = ViewBag.courseId;
     var member = await _memberClient.GetCurrentClient();
 }
 
-    <div class="container mt-3 pb-3">
-        <h2>@courseName</h2>
-        <h4>Studenți înscriși</h4>
-
-        @if (Model.Any())
-        {
-            <table class="table border-dark">
-                <thead>
-                    <tr>
-                        <th>
-                            Nume
-                        </th>
-                        <th>
-                            Grupa
-                        </th>
-                        <th>
-                            Domeniu
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for(int i = 0; i < Model.Count; i ++)
-                    {
-                        <tr>
-                            <td>
-                                @Model[i].FirstName @Model[i].LastName
-                            </td>
-                            <td>
-                                @Model[i].Grade
-                            </td>
-                            <td>
-                                @Model[i].FieldOfStudy
-                            </td>
-                            <td>
-                                <a asp-controller="Teacher" asp-action="ShowMarks" asp-route-studentid="@Model[i].MemberId" asp-route-courseid="@courseid"
-                                   class="btn btn-outline-dark">
-                                    Note
-                                </a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        }
-        else
-        {
+    <div style="background-color:#EED75A" class="container-fluid text-dark pt-3 pb-4">
+        <div class="container">
+            <h2>@courseName</h2>
             <hr class="border-dark" />
-            <p>Nu există studenți înscriși la acest curs</p>
-        }
-
-        
-        <a class="btn btn-outline-dark" asp-controller="Teacher" asp-action="SubscribeStudents" asp-route-courseid="@courseid">Înscrie studenți</a>
-        <br />
-        <br />
-        <a asp-controller="Teacher" asp-action="Index">Înapoi la lista de cursuri</a>
-
+            <h4>Studenți înscriși</h4>
+        </div>
     </div>
+
+
+<div class="container mt-3 pb-3">
+    @if (Model.Any())
+    {
+        <table class="table border-dark">
+            <thead>
+                <tr>
+                    <th>
+                        Nume
+                    </th>
+                    <th>
+                        Grupa
+                    </th>
+                    <th>
+                        Domeniu
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model[i].FirstName @Model[i].LastName
+                        </td>
+                        <td>
+                            @Model[i].Grade
+                        </td>
+                        <td>
+                            @Model[i].FieldOfStudy
+                        </td>
+                        <td>
+                            <a asp-controller="Teacher" asp-action="ShowMarks" asp-route-studentid="@Model[i].MemberId" asp-route-courseid="@courseid">
+                                Note
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Nu există studenți înscriși la acest curs</p>
+    }
+
+
+    <a class="btn btn-outline-light btn-outline-yellow" asp-controller="Teacher" asp-action="SubscribeStudents" asp-route-courseid="@courseid">Înscrie studenți</a>
+    <br />
+    <br />
+    <a asp-controller="Teacher" asp-action="Index">Înapoi la lista de cursuri</a>
+
+</div>
 @section Scripts {
     <script src="~/js/removeNavbarCollapse.js"></script>
     <script src="~/js/colorTeacherPage.js"></script>

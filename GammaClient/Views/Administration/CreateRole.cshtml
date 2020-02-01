@@ -2,32 +2,36 @@
 @inject GammaClient.Services.MemberClient _memberClient;
 
 @{
-    ViewData["Title"] = "CreateRole";
+    ViewData["Title"] = "Creează Rol";
     var member = await _memberClient.GetCurrentClient();
 }
 
+<div class="container-fluid bg-danger text-light pt-3 pb-4">
+    <div class="container">
+        <h2>Creează un rol</h2>
+    </div>
+</div>
+
 <div class="container mt-3 pb-3">
-    <h3 class="text-light">Creează un rol Gamma</h3>
-    <hr class="border-light"/>
     <div class="row">
         <div class="col-md-4">
             <form asp-action="CreateRole">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="RoleName" class="control-label text-light"></label>
-                    <input asp-for="RoleName" class="form-control bg-danger border-white text-light" />
-                    <span asp-validation-for="RoleName" class="text-light"></span>
+                    <label asp-for="RoleName" class="control-label"></label>
+                    <input asp-for="RoleName" class="form-control border-dark text-dark" />
+                    <span asp-validation-for="RoleName" class="text-dark"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Creează" class="btn btn-outline-light" />
+                    <input type="submit" value="Creează" class="btn btn-outline-danger" />
                 </div>
             </form>
-            <p class="error-message-light">@TempData["CreateRoleErrorMessage"]</p>
+            <p class="error-message">@TempData["CreateRoleErrorMessage"]</p>
         </div>
     </div>
 
     <div>
-        <a asp-action="showAllRoles" class="text-light">Înapoi la lista de roluri</a>
+        <a asp-action="showAllRoles">Înapoi la lista de roluri</a>
     </div>
 </div>
 

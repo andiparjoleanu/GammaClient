@@ -63,20 +63,5 @@ namespace GammaClient.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpGet]
-        public async Task<IActionResult> MyAccount()
-        {
-            var member = await _memberClient.GetCurrentClient();
-            var role = await _memberClient.GetCurrentClientInfo();
-            MemberVM memberVM = new MemberVM
-            {
-                Name = member.FirstName + " " + member.LastName,
-                Email = member.Email,
-                Role = role.RoleName
-            };
-
-            return View(memberVM);
-        }
-
     }
 }

@@ -2,17 +2,21 @@
 @inject GammaClient.Services.MemberClient _memberClient;
 
 @{
-    ViewData["Title"] = "AddTeachers";
+    ViewData["Title"] = "Adaugă Profesori";
     var schoolName = ViewBag.showTeachersSchool;
     var schoolId = ViewBag.schoolId;
     var member = await _memberClient.GetCurrentClient();
 }
 
-<div class="container mt-3 pb-3">
-    <h2 class="text-primary">@schoolName</h2>
-    <h4 class="text-primary">Adaugați profesori în personalul instituției</h4>
-    <hr class="border-primary" />
+<div class="container-fluid bg-primary text-light pt-3 pb-4">
+    <div class="container">
+        <h2 class="text-white">@schoolName</h2>
+        <hr class="border-light" />
+        <h5 class="text-white">Adaugați profesori în personalul instituției</h5>
+    </div>
+</div>
 
+<div class="container mt-3 pb-3">
     @if (Model.Any())
     {
         <form method="post" asp-action="AddTeachers">
@@ -50,7 +54,7 @@
         <p class="text-primary">Nu există profesori disponibili</p>
     }
     <div>
-        <a class="btn btn-outline-primary mt-auto" asp-action="ShowTeachers" asp-route-schoolid="@schoolId">Înapoi la lista de profesori</a>
+        <a class="mt-auto" asp-action="ShowTeachers" asp-route-schoolid="@schoolId">Înapoi la lista de profesori</a>
     </div>
 </div>
 

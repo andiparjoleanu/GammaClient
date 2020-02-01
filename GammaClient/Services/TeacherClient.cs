@@ -20,58 +20,168 @@ namespace GammaClient.Services
 
         public async Task<List<CourseVM>> GetCourses(string teacherid)
         {
-            return await HttpMethods<List<CourseVM>>.GetAsync(Client, "/getCourses/" + teacherid);
+            try {
+                List<CourseVM> courses = await HttpMethods<List<CourseVM>>.GetAsync(Client, "/getCourses/" + teacherid);
+                return courses;
+            }
+            catch(Exception)
+            {
+                return new List<CourseVM>();
+            }
         }
 
 
         public async Task<CourseVM> GetCourse(string courseid)
         {
-            return await HttpMethods<CourseVM>.GetAsync(Client, "/getCourse/" + courseid);
+
+            try
+            {
+                CourseVM course = await HttpMethods<CourseVM>.GetAsync(Client, "/getCourse/" + courseid);
+                return course;
+            }
+            catch(Exception)
+            {
+                return new CourseVM { };
+            }
         }
 
         public async Task<ResultVM> EditCourse(CourseVM course)
         {
-            return await HttpMethods<CourseVM>.PutAsync(Client, course, "/editCourse");
+            try
+            {
+                ResultVM result = await HttpMethods<CourseVM>.PutAsync(Client, course, "/editCourse");
+                return result;
+            }
+            catch(Exception e)
+            {
+                return new ResultVM
+                {
+                    Status = Status.Error,
+                    Message = e.Message
+                };
+            }
         }
 
         public async Task<TeacherVM> GetTeacherInfo(string teacherid)
         {
-            return await HttpMethods<TeacherVM>.GetAsync(Client, "/getTeacherInfo/" + teacherid);
+            try 
+            {
+                TeacherVM teacher = await HttpMethods<TeacherVM>.GetAsync(Client, "/getTeacherInfo/" + teacherid);
+                return teacher;
+            }
+            catch(Exception)
+            {
+                return new TeacherVM { };
+            }
         }
+
 
         public async Task<ResultVM> CreateCourse(CourseVM course)
         {
-            return await HttpMethods<CourseVM>.PostAsync(Client, course, "/createCourse");
+            try
+            {
+                ResultVM result = await HttpMethods<CourseVM>.PostAsync(Client, course, "/createCourse");
+                return result;
+            }
+            catch(Exception e)
+            {
+                return new ResultVM
+                {
+                    Status = Status.Error,
+                    Message = e.Message
+                };
+            }
         }
 
         public async Task<List<StudentVM>> GetStudents(string courseid)
         {
-            return await HttpMethods<List<StudentVM>>.GetAsync(Client, "/getStudents/" + courseid);
+            try 
+            {
+                List<StudentVM> students = await HttpMethods<List<StudentVM>>.GetAsync(Client, "/getStudents/" + courseid);
+                return students;
+            }
+            catch(Exception)
+            {
+                return new List<StudentVM>();
+            }
         }
+
 
         public async Task<List<StudentVM>> GetStudentsToJoinIn(string courseid, string schoolid)
         {
-            return await HttpMethods<List<StudentVM>>.GetAsync(Client, "/getStudentsToJoinIn/" + courseid + "/" + schoolid);
+            try 
+            {
+                List<StudentVM> students = await HttpMethods<List<StudentVM>>.GetAsync(Client, "/getStudentsToJoinIn/" + courseid + "/" + schoolid);
+                return students;
+            }
+            catch(Exception)
+            {
+                return new List<StudentVM>();
+            }
         }
 
         public async Task<ResultVM> SubscribeStudents(SubscribeStudentsVM studentVMs)
         {
-            return await HttpMethods<SubscribeStudentsVM>.PostAsync(Client, studentVMs, "/subscribeStudents");
+            try
+            {
+                ResultVM model = await HttpMethods<SubscribeStudentsVM>.PostAsync(Client, studentVMs, "/subscribeStudents");
+                return model;
+            }
+            catch(Exception e)
+            {
+                return new ResultVM
+                {
+                    Status = Status.Error,
+                    Message = e.Message
+                };
+            }
         }
 
         public async Task<ResultVM> RemoveCourse(string courseid)
         {
-            return await HttpMethods<ResultVM>.GetAsync(Client, "/removeCourse/" + courseid);
+            try
+            {
+                ResultVM result = await HttpMethods<ResultVM>.GetAsync(Client, "/removeCourse/" + courseid);
+                return result;
+            }
+            catch(Exception e)
+            {
+                return new ResultVM
+                {
+                    Status = Status.Error,
+                    Message = e.Message
+                };
+            }
         }
 
         public async Task<List<MarkVM>> GetMarks(string studentid, string courseid)
         {
-            return await HttpMethods<List<MarkVM>>.GetAsync(Client, "/getMarks/" + studentid + "/" + courseid);
+            try 
+            {
+                List<MarkVM> marks = await HttpMethods<List<MarkVM>>.GetAsync(Client, "/getMarks/" + studentid + "/" + courseid);
+                return marks;    
+            }
+            catch(Exception)
+            {
+                return new List<MarkVM>();
+            }
         }
 
         public async Task<ResultVM> AddMark(MarkVM markVM)
         {
-            return await HttpMethods<MarkVM>.PostAsync(Client, markVM, "/addMark");
+            try
+            {
+                ResultVM result = await HttpMethods<MarkVM>.PostAsync(Client, markVM, "/addMark");
+                return result;
+            }
+            catch(Exception e)
+            {
+                return new ResultVM
+                {
+                    Status = Status.Error,
+                    Message = e.Message
+                };
+            }
         }
     }
 }

@@ -1,10 +1,15 @@
 ﻿@inject GammaClient.Services.MemberClient _memberClient;
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Acasă";
     var member = await _memberClient.GetCurrentClient();
 }
 
+<div class="container-fluid bg-primary text-light pt-3 pb-4">
+    <div class="container">
+        <h2>Instituții de învățământ</h2>
+    </div>
+</div>
 <div class="container mt-3 pb-3">
     <div class="container">
         <div class="row">

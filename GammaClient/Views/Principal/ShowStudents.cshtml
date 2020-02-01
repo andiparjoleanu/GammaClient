@@ -2,88 +2,94 @@
 @inject GammaClient.Services.MemberClient _memberClient;
 
 @{
-    ViewData["Title"] = "ShowStudents";
+    ViewData["Title"] = "Studenți";
     var schoolName = ViewBag.showStudentsSchool;
     var schoolId = ViewBag.schoolId;
     var member = await _memberClient.GetCurrentClient();
 }
 
-    <div class="container mt-3 pb-3">
-        <h2 class="text-primary">@schoolName</h2>
-        <h4 class="text-primary">Studenți</h4>
-        @if (Model.Any())
-        {
-            <table class="table text-primary border-primary">
-                <thead>
-                    <tr>
-                        <th>
-                            Student
-                        </th>
-                        <th>
-                            Clasa
-                        </th>
-                        <th>
-                            Specializare
-                        </th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr class="text-primary">
-                            <td>
-                                @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Grade)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.FieldOfStudy)
-                            </td>
-                            <td>
-                                <a class="text-primary" asp-action="EditStudent" asp-controller="Principal" asp-route-studentid="@item.MemberId" asp-route-schoolid="@schoolId">Editează</a>
-                            </td>
-                            <td>
-                                <a href="#" class="text-primary" onclick="deleteInfoStudent('@item.FirstName @item.LastName', '@item.MemberId', '@item.SchoolId');">
-                                    Șterge
-                                </a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
 
-            <div id="myModal" class="modal">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 id="deletedElement"></h3>
-                        <span class="close">&times;</span>
-                    </div>
-                    <div class="modal-body">
-                        <p>Confirmați finalizarea operației</p>
-                    </div>
-                    <div class="modal-footer">
-                        <input id="studentid" type="hidden" />
-                        <input id="schoolid" type="hidden" />
-                        <button onclick="routeStudent();" class="btn btn-primary">Ok</button>
-                        <button id="giveUp" class="btn btn-primary">Renunță</button>
-                    </div>
+<div class="container-fluid bg-primary text-light pt-3 pb-4">
+    <div class="container">
+        <h2 class="text-white">@schoolName</h2>
+        <hr class="border-white"/>
+        <h4 class="text-white">Studenți</h4>
+    </div>
+</div>
+<div class="container mt-3 pb-3">
+    @if (Model.Any())
+    {
+        <table class="table text-primary border-primary">
+            <thead>
+                <tr>
+                    <th>
+                        Student
+                    </th>
+                    <th>
+                        Clasa
+                    </th>
+                    <th>
+                        Specializare
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="text-primary">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Grade)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FieldOfStudy)
+                        </td>
+                        <td>
+                            <a class="text-primary" asp-action="EditStudent" asp-controller="Principal" asp-route-studentid="@item.MemberId" asp-route-schoolid="@schoolId">Editează</a>
+                        </td>
+                        <td>
+                            <a href="#" class="text-primary" onclick="deleteInfoStudent('@item.FirstName @item.LastName', '@item.MemberId', '@item.SchoolId');">
+                                Șterge
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="deletedElement"></h3>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p>Confirmați finalizarea operației</p>
+                </div>
+                <div class="modal-footer">
+                    <input id="studentid" type="hidden" />
+                    <input id="schoolid" type="hidden" />
+                    <button onclick="routeStudent();" class="btn btn-primary">Ok</button>
+                    <button id="giveUp" class="btn btn-primary">Renunță</button>
                 </div>
             </div>
-        }
-        else
-        {
-            <hr class="border-primary" />
-            <p class="text-primary">Nu există studenți înregistrați pentru această instituție</p>
-        }
+        </div>
+    }
+    else
+    {
+        <hr class="border-primary" />
+        <p class="text-primary">Nu există studenți înregistrați pentru această instituție</p>
+    }
 
-        <a asp-action="AddStudents" class="btn btn-outline-primary" asp-route-schoolid="@schoolId">Adaugă studenți</a>
-        <br />
-        <br />
-        <a asp-action="Index" class="text-primary">Întoarce-te la pagina principală</a>
-    </div>
+    <a asp-action="AddStudents" class="btn btn-outline-primary" asp-route-schoolid="@schoolId">Adaugă studenți</a>
+    <br />
+    <br />
+    <a asp-action="Index" class="text-primary">Întoarce-te la pagina principală</a>
+</div>
 
 @section Scripts {
     <script src="~/js/removeNavbarCollapse.js"></script>

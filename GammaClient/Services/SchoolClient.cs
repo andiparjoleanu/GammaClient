@@ -20,53 +20,165 @@ namespace GammaClient.Services
 
         public async Task<List<SchoolVM>> GetAllSchools()
         {
-            return await HttpMethods<List<SchoolVM>>.GetAsync(Client, "/getAllSchools");
+            try
+            {
+                List<SchoolVM> schools = await HttpMethods<List<SchoolVM>>.GetAsync(Client, "/getAllSchools");
+                return schools;
+            }
+            catch(Exception)
+            {
+                return new List<SchoolVM>();
+            }
         }
 
         public async Task<ResultVM> AddSchool(SchoolVM newSchool)
         {
-            return await HttpMethods<SchoolVM>.PostAsync(Client, newSchool, "/addSchool");
+            try
+            {
+                ResultVM result = await HttpMethods<SchoolVM>.PostAsync(Client, newSchool, "/addSchool");
+                return result;
+            }
+            catch(Exception e)
+            {
+                return new ResultVM
+                {
+                    Status = Status.Error,
+                    Message = e.Message
+                };
+            }
+            
         }
 
         public async Task<List<TeacherVM>> GetAllTeachers()
         {
-            return await HttpMethods<List<TeacherVM>>.GetAsync(Client, "/getAllTeachers");
+            try
+            {
+                List<TeacherVM> teachers = await HttpMethods<List<TeacherVM>>.GetAsync(Client, "/getAllTeachers");
+                return teachers;
+            }
+            catch(Exception)
+            {
+                return new List<TeacherVM>();
+            }
         }
 
         public async Task<List<StudentVM>> GetAllStudents()
         {
-            return await HttpMethods<List<StudentVM>>.GetAsync(Client, "/getAllStudents");
+            try
+            {
+                List<StudentVM> students = await HttpMethods<List<StudentVM>>.GetAsync(Client, "/getAllStudents");
+                return students;
+            }
+            catch(Exception)
+            {
+                return new List<StudentVM>();
+            }
         }
 
 
         public async Task<ResultVM> AddTeachers(List<TeacherVM> selectedTeachers)
         {
-            return await HttpMethods<List<TeacherVM>>.PostAsync(Client, selectedTeachers, "/addTeachers");
+            try
+            {
+                ResultVM result = await HttpMethods<List<TeacherVM>>.PostAsync(Client, selectedTeachers, "/addTeachers");
+                return result;
+            }
+            catch(Exception e)
+            {
+                return new ResultVM
+                {
+                    Message = e.Message,
+                    Status = Status.Error
+                };
+            }
         }
 
         public async Task<ResultVM> AddStudents(List<StudentVM> selectedTeachers)
         {
-            return await HttpMethods<List<StudentVM>>.PostAsync(Client, selectedTeachers, "/addStudents");
+            try
+            {
+                ResultVM result = await HttpMethods<List<StudentVM>>.PostAsync(Client, selectedTeachers, "/addStudents");
+                return result;
+            }
+            catch(Exception e)
+            {
+                return new ResultVM
+                {
+                    Message = e.Message,
+                    Status = Status.Error
+                };
+            }
         }
 
         public async Task<ResultVM> UpdateTeacher(TeacherVM teacherVM)
         {
-            return await HttpMethods<TeacherVM>.PutAsync(Client, teacherVM, "/updateTeacher");
+            try
+            {
+                ResultVM resultVM = await HttpMethods<TeacherVM>.PutAsync(Client, teacherVM, "/updateTeacher");
+                return resultVM;
+            }
+            catch(Exception e)
+            {
+                return new ResultVM
+                {
+                    Message = e.Message,
+                    Status = Status.Error
+                };
+            }
+
         }
 
         public async Task<ResultVM> UpdateStudent(StudentVM studentVM)
         {
-            return await HttpMethods<StudentVM>.PutAsync(Client, studentVM, "/updateStudent");
+            try
+            {
+                ResultVM result = await HttpMethods<StudentVM>.PutAsync(Client, studentVM, "/updateStudent");
+                return result;
+            }
+            catch(Exception e)
+            {
+                return new ResultVM
+                {
+                    Message = e.Message,
+                    Status = Status.Error
+                };
+            }
+
         }
 
         public async Task<ResultVM> RemoveTeacher(string teacherid)
         {
-            return await HttpMethods<ResultVM>.GetAsync(Client, "/deleteTeacher/" + teacherid);
+            try 
+            {
+                ResultVM result = await HttpMethods<ResultVM>.GetAsync(Client, "/deleteTeacher/" + teacherid);
+                return result;
+            }
+            catch (Exception e)
+            {
+                return new ResultVM
+                {
+                    Message = e.Message,
+                    Status = Status.Error
+                };
+            }
         }
 
         public async Task<ResultVM> RemoveStudent(string studentid)
         {
-            return await HttpMethods<ResultVM>.GetAsync(Client, "/deleteStudent/" + studentid);
+            try
+            {
+                ResultVM result = await HttpMethods<ResultVM>.GetAsync(Client, "/deleteStudent/" + studentid);
+                return result;
+            }
+            catch (Exception e)
+            {
+                return new ResultVM
+                {
+                    Message = e.Message,
+                    Status = Status.Error
+                };
+            }
+
         }
     }
 }

@@ -1,0 +1,102 @@
+﻿@using GammaClient.ViewModels;
+@inject GammaClient.Services.MemberClient _memberClient;
+
+@model IEnumerable<CourseVM>
+
+@{
+    var schoolid = ViewBag.schoolid;
+    var fieldOfStudy = ViewBag.fieldOfStudy;
+    var grade = ViewBag.grade;
+
+    ViewData["Title"] = "Acasă";
+    var member = await _memberClient.GetCurrentClient();
+}
+
+<div style="background-color:#18A7B5" class="container-fluid text-white pt-3 pb-4">
+    <div class="container">
+        <h2>Cursurile mele</h2>
+    </div>
+</div>
+
+<div class="container mt-3 pb-3">
+    @if (Model.Any())
+    {
+        foreach (var courseVM in Model)
+        {
+            <div class="card h-100 mt-3 w3-animate-opacity" style="border-color:#18A7B5">
+                <div class="modal-header" style="border-color:#18A7B5">
+                    <h3>@courseVM.Name</h3>
+                </div>
+                <div class="card-body d-flex flex-column align-items-start" style="border-color:#18A7B5">
+                    <h5>@courseVM.Description</h5>
+                    <h6><span>Domeniu de studiu:</span>&nbsp;@courseVM.FieldOfStudy</h6>
+                    <h6><span>Grupa de studiu:</span>&nbsp;@courseVM.Grade</h6>
+                    <br />
+                    <div>
+                        <a class="d-inline-block btn btn-outline-light btn-outline-blue mb-4 mb-md-0 mr-md-4" 
+                           asp-action="showMarks" asp-controller="Student" asp-route-studentid="@member.Id" asp-route-courseid="@courseVM.CourseId" >
+                            Vezi notele
+                        </a>
+                        <a class="d-block d-md-inline-block btn btn-outline-light btn-outline-blue" 
+                           href="#" onclick="getDocument('@courseVM.Name', `@courseVM.Lesson`)">
+                            Descarcă suportul de curs
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        }
+    }
+    else
+    {
+        if (schoolid != null && fieldOfStudy != null && grade != null)
+        {
+            <div class="card text-dark">
+                <div class="card-body">
+                    Nu sunteți înscris la niciun curs
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="card text-dark">
+                <div class="card-body">
+                    Cont de student inactiv. Contul va fi activat automat în momentul în care veți apărea în catalogul unei instituții ca membru al unei grupe de studiu
+                </div>
+            </div>
+        }
+
+    }
+</div>
+
+@section Scripts {
+    <script src="~/js/removeNavbarCollapse.js"></script>
+    <script src="~/js/colorStudentPage.js"></script>
+    <script>
+        function getDocument(course, text)
+        {
+            var element = document.createElement("a");
+            element.style.display = "none";
+            element.setAttribute("href", "data:text/html;charset=utf-8,%EF%BB%BF" + text);
+            element.setAttribute("download", course + ".txt");
+            element.click();
+            document.body.removeChild(element);
+        }
+    </script>
+    @if (member != null)
+    {
+        <script>
+            var popi = document.getElementById("popi");
+            popi.title = '<span class="text-center d-block">@member.UserName</span>';
+            popi.setAttribute("data-content",
+                '<!DOCTYPE html><html><p class="text-center">@member.FirstName @member.LastName</p>' +
+                '<a href="../Account/Logout" class="btn btn-outline-light btn-outline-blue">Deconectare</a></html>');
+        </script>
+    }
+    else
+    {
+        <script>
+            location.href = "../Account/Login";
+        </script>
+    }
+}

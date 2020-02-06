@@ -208,6 +208,16 @@ body {
         background-color: #ccb538;
     }
 
+.btn-outline-blue {
+    border-color: #18A7B5;
+    color: #18A7B5;
+}
+
+    .btn-outline-blue:hover {
+        color: white;
+        background-color: #18A7B5;
+    }
+
 .btn-yellow {
     background-color: #ccb538;
     color: white;

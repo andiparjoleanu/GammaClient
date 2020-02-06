@@ -184,5 +184,24 @@ namespace GammaClient.Controllers
             return RedirectToAction("ShowMarks", new { markVM.StudentId, markVM.CourseId });
         }
 
+        [HttpGet("ShowLesson")]
+        public async Task<IActionResult> ShowLesson(string courseid)
+        {
+            var course = await _teacherClient.GetCourse(courseid);
+            return View(course);
+        }
+
+        [HttpPost("ShowLesson")]
+        public async Task<IActionResult> ShowLesson([FromForm] CourseVM course)
+        {
+            var result = await _teacherClient.EditCourse(course);
+            if (result.Status == Status.Error)
+            {
+                TempData["updateCourseErrorMessage"] = result.Message;
+                return RedirectToAction("EditCourse", new { courseid = course.CourseId });
+            }
+
+            return RedirectToAction("Index", "Teacher");
+        }
     }
 }

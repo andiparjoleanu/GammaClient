@@ -10,11 +10,9 @@
     var member = await _memberClient.GetCurrentClient();
 }
 
-<div style="background-color:#EED75A" class="container-fluid text-dark pt-3 pb-4">
+<div style="background-color:#18A7B5" class="container-fluid text-white pt-3 pb-4">
     <div class="container">
-        <h2>@studentName</h2>
-        <hr class="border-dark" />
-        <h4>Note la disciplina @courseName</h4>
+        <h2>Note la disciplina @courseName</h2>
     </div>
 </div>
 <div class="container mt-3 pb-3">
@@ -54,21 +52,18 @@
                 </tbody>
             </table>
         </div>
-        
+
     }
     else
     {
         <p>Nu ați adăugat nicio notă</p>
     }
     <br />
-    <a asp-controller="Teacher" asp-action="AddMark" asp-route-courseid="@courseid" asp-route-studentid="@studentid" class="btn btn-outline-light btn-outline-yellow">Adăugați o notă</a>
-    <br />
-    <br />
-    <a asp-controller="Teacher" asp-action="ShowStudents" asp-route-courseid="@courseid">Înapoi la lista de studenți</a>
+    <a asp-controller="Student" asp-action="Index">Înapoi la lista de cursuri</a>
 </div>
 @section Scripts {
     <script src="~/js/removeNavbarCollapse.js"></script>
-    <script src="~/js/colorTeacherPage.js"></script>
+    <script src="~/js/colorStudentPage.js"></script>
     @if (member != null)
     {
         <script>
@@ -76,7 +71,7 @@
             popi.title = '<span class="text-center d-block">@member.UserName</span>';
             popi.setAttribute("data-content",
                 '<!DOCTYPE html><html><p class="text-center">@member.FirstName @member.LastName</p>' +
-                '<a href="../../../Account/Logout" class="btn btn-outline-light btn-outline-yellow">Deconectare</a></html>');
+                '<a href="../Account/Logout" class="btn btn-outline-light btn-outline-blue">Deconectare</a></html>');
         </script>
     }
     else

@@ -88,7 +88,7 @@ namespace GammaClient.Services
                 List<AddUserRoleVM> model = await HttpMethods<List<AddUserRoleVM>>.GetAsync(Client, "/getUsersWithoutRole/" + roleId);
                 return model;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new List<AddUserRoleVM>();
             }

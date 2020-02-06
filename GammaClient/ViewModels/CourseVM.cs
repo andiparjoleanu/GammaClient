@@ -21,7 +21,7 @@ namespace GammaClient.ViewModels
 
         [DisplayName("Descriere")]
         public string Description { get; set; }
-
+        public string Lesson { get; set; }
         public string TeacherId { get; set; }
     }
 }

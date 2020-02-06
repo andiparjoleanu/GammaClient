@@ -31,12 +31,14 @@
                         <h6><span>Domeniu de studiu:</span>&nbsp;@courseVM.FieldOfStudy</h6>
                         <h6><span>Grupa de studiu:</span>&nbsp;@courseVM.Grade</h6>
                         <br />
-                        <div class="d-flex flex-row align-content-center justify-content-around">
-                            <a class="btn btn-outline-light btn-outline-yellow mt-auto mr-4" asp-action="editCourse"
+                        <a asp-controller="Teacher" asp-action="ShowLesson" asp-route-courseid="@courseVM.CourseId">Vezi suportul de curs</a>
+                        <br />
+                        <div>
+                            <a class="d-inline-block btn btn-outline-light btn-outline-yellow mb-4 mb-md-0 mr-md-4" asp-action="editCourse"
                                asp-controller="Teacher" asp-route-courseid="@courseVM.CourseId">
                                 Editează
                             </a>
-                            <a class="btn btn-outline-light btn-outline-yellow mt-auto" asp-action="ShowStudents"
+                            <a class="d-block d-md-inline-block btn btn-outline-light btn-outline-yellow" asp-action="ShowStudents"
                                asp-controller="Teacher" asp-route-courseid="@courseVM.CourseId">
                                 Afișează studenții participanți
                             </a>

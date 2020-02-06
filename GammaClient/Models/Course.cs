@@ -9,6 +9,7 @@ namespace GammaClient.Models
         public string Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public string Lesson { get; set; }
         public int Grade { get; set; }
         public string FieldOfStudy { get; set; }
         public string TeacherId { get; set; }

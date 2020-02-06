@@ -32,6 +32,7 @@ namespace GammaClient.Controllers
                     "Administrator" => RedirectToAction("ShowAllRoles", "Administration"),
                     "Director" => RedirectToAction("Index", "Principal"),
                     "Profesor" => RedirectToAction("Index", "Teacher"),
+                    "Student" => RedirectToAction("Index", "Student"),
                     _ => View(new IndexVM
                     {
                         Username = member.UserName,

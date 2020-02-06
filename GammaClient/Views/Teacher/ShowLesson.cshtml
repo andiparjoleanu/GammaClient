@@ -1,0 +1,55 @@
+﻿@model GammaClient.ViewModels.CourseVM;
+@inject GammaClient.Services.MemberClient _memberClient;
+@{
+    ViewData["Title"] = "ShowLesson";
+    var member = await _memberClient.GetCurrentClient();
+}
+
+<div style="background-color:#EED75A" class="container-fluid text-dark pt-3 pb-4">
+    <div class="container">
+        <h2>@Model.Name</h2>
+        <hr class="border-dark" />
+        <h4>Suport de curs</h4>
+    </div>
+</div>
+<div class="container mt-3 pb-3">
+    <form asp-action="ShowLesson" asp-controller="Teacher">
+        <div asp-validation-summary="ModelOnly" class="text-dark"></div>
+        <input type="hidden" asp-for="CourseId" />
+        <input type="hidden" asp-for="Name" />
+        <input type="hidden" asp-for="FieldOfStudy" />
+        <input type="hidden" asp-for="Description" />
+        <input type="hidden" asp-for="Grade" />
+        <div class="form-group">
+            <textarea asp-for="@Model.Lesson" asp-value="@Model.Lesson" class="jumbotron w-100 p-2" style="height:500px; background-color:white; border: 2px solid #ccb538;">
+                
+            </textarea>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Salvați modificările" class="btn btn-outline-light btn-outline-yellow" />
+        </div>
+    </form>
+    <p class="error-message">@TempData["updateCourseErrorMessage"]</p>
+</div>
+
+@section Scripts {
+    <script src="~/js/removeNavbarCollapse.js"></script>
+    <script src="~/js/colorTeacherPage.js"></script>
+    
+    @if (member != null)
+    {
+        <script>
+            popi = document.getElementById("popi");
+            popi.title = '<span class="text-center d-block">@member.UserName</span>';
+            popi.setAttribute("data-content",
+                '<!DOCTYPE html><html><p class="text-center">@member.FirstName @member.LastName</p>' +
+                '<a href="../../Account/Logout" class="btn btn-outline-light btn-outline-yellow">Deconectare</a></html>');
+        </script>
+    }
+    else
+    {
+        <script>
+            location.href = "../../Account/Login";
+        </script>
+    }
+}

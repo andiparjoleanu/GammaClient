@@ -20,7 +20,8 @@ namespace GammaClient.Services
 
         public async Task<List<CourseVM>> GetCourses(string teacherid)
         {
-            try {
+            try 
+            {
                 List<CourseVM> courses = await HttpMethods<List<CourseVM>>.GetAsync(Client, "/getCourses/" + teacherid);
                 return courses;
             }

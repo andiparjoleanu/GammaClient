@@ -19,47 +19,50 @@
 <div class="container mt-3 pb-3">
     @if (Model.Any())
     {
-        <table class="table text-primary border-primary">
-            <thead>
-                <tr>
-                    <th>
-                        Student
-                    </th>
-                    <th>
-                        Clasa
-                    </th>
-                    <th>
-                        Specializare
-                    </th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr class="text-primary">
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Grade)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FieldOfStudy)
-                        </td>
-                        <td>
-                            <a class="text-primary" asp-action="EditStudent" asp-controller="Principal" asp-route-studentid="@item.MemberId" asp-route-schoolid="@schoolId">Editează</a>
-                        </td>
-                        <td>
-                            <a href="#" class="text-primary" onclick="deleteInfoStudent('@item.FirstName @item.LastName', '@item.MemberId', '@item.SchoolId');">
-                                Șterge
-                            </a>
-                        </td>
+        <div class="table-responsive-sm">
+            <table class="table text-primary border-primary">
+                <thead>
+                    <tr>
+                        <th>
+                            Student
+                        </th>
+                        <th>
+                            Clasa
+                        </th>
+                        <th>
+                            Specializare
+                        </th>
+                        <th></th>
+                        <th></th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="text-primary">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Grade)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FieldOfStudy)
+                            </td>
+                            <td>
+                                <a class="text-primary" asp-action="EditStudent" asp-controller="Principal" asp-route-studentid="@item.MemberId" asp-route-schoolid="@schoolId">Editează</a>
+                            </td>
+                            <td>
+                                <a href="#" class="text-primary" onclick="deleteInfoStudent('@item.FirstName @item.LastName', '@item.MemberId', '@item.SchoolId');">
+                                    Șterge
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        
 
         <div id="myModal" class="modal">
             <div class="modal-content">

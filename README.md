@@ -1,4 +1,4 @@
-# Gamma</br>Versiunea pentru client
+﻿# Gamma</br>Versiunea pentru client
 Gamma este o aplicație web pentru gestionarea activităților didactice din cadrul unităților de învățământ.<br/>
 Aplicația este definită pentru 5 categorii de utilizatori: utilizator musafir, membru inactiv, administrator, director general, profesor.
 
@@ -20,3 +20,6 @@ Directorul general poate să înregistreze instituții de învățământ în si
 
 ### Profesor
 Un profesor poate să creeze cursuri, să înscrie studenți eligibili la curs și să atribuie studenților note pentru activitatea realizată în cadrul cursului. Profesorul primește aceste drepturi doar dacă un director general asociază contul profesorului cu o instituție înregistrată în sistem și cu un departament existent din cadrul instituției, întrucât cursurile sunt definite pentru un anumit domeniu de studiu și pentru o anumită grupă de studenți.
+
+### Student
+Fiecare student poate să-și vadă notele obținute la cursurile la care a fost înscris și poate descărca materialele didactice încărcate de profesori. Pentru a putea folosi contul, studentul trebuie să fie înregistrat în catalogul unei instituții existente și să facă parte dintr-o grupă de studiu din cadrul acelei instituții.

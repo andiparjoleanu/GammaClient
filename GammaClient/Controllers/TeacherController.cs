@@ -162,10 +162,17 @@ namespace GammaClient.Controllers
         }
 
         [HttpGet("addMark")]
-        public IActionResult AddMark(string courseid, string studentid)
+        public async Task<IActionResult> AddMark(string courseid, string studentid)
         {
             ViewBag.courseid = courseid;
             ViewBag.studentid = studentid;
+            
+            CourseVM course = await _teacherClient.GetCourse(courseid);
+            List<StudentVM> students = await _teacherClient.GetStudents(courseid);
+            StudentVM student = students.FirstOrDefault(st => st.MemberId == studentid);
+
+            ViewBag.coursename = course.Name;
+            ViewBag.studentname = student.FirstName + " " + student.LastName;
 
             return View();
         }

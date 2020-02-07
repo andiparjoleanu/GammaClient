@@ -5,12 +5,17 @@
     ViewData["Title"] = "Note";
     var studentid = ViewBag.studentid;
     var courseid = ViewBag.courseid;
+    var studentname = ViewBag.studentname;
+    var coursename = ViewBag.coursename;
     var member = await _memberClient.GetCurrentClient();
 }
 
 <div style="background-color:#EED75A" class="container-fluid text-dark pt-3 pb-4">
     <div class="container">
-        <h2>Adaugă un calificativ</h2>
+        <h2>@studentname</h2>
+        <hr class="border-dark" />
+        <h3>@coursename</h3>
+        <h4>Adaugă un calificativ</h4>
     </div>
 </div>
 <div class="container mt-3 pb-3">
